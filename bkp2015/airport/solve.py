@@ -42,20 +42,17 @@ s = socket.create_connection((SERVER, PORT))
 pref = s.recv(4096)
 assert len(pref) == 12
 print "Solving challenge %s" % pref
-hashes = set()
 i = 0
 while True:
     answer = pref + ''.join(chr(random.randint(0,0xff)) for _ in xrange(8))
     assert len(answer) == 20
     ha = hashlib.sha1()
     ha.update(answer)
-    d = ha.digest()
-    hashes.add(d[-3:])
     if ha.digest().endswith('\xff\xff\xff'):
         break
     i += 1
     if i % 100000 == 0:
-        print i, len(hashes)
+        print i
 print "Done!"
 s.send(answer)
 
