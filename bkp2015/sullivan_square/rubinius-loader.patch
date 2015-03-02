@@ -1,0 +1,17 @@
+diff --git a/vm/builtin/system.cpp b/vm/builtin/system.cpp
+index e8cc292..4757cf2 100644
+--- a/vm/builtin/system.cpp
++++ b/vm/builtin/system.cpp
+@@ -144,12 +144,6 @@ namespace rubinius {
+       return Primitives::failure();
+     }
+ 
+-    uint64_t sig = signature->to_ulong_long();
+-    if((sig > 0 && cf->signature != sig)) {
+-      delete cf;
+-      return Primitives::failure();
+-    }
+-
+     Object *body = cf->body(state);
+ 
+     delete cf;
