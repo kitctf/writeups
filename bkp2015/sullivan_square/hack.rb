@@ -7,14 +7,12 @@ class Trie
   attr_reader :root
   class Node
     def walk(path="")
-      path = path + @char
       if @end
-        puts $c.decrypt(path) + ' => ' + @value
+        puts $c.decrypt(path + @char) + ' => ' + @value
       end
       @left.walk(path) if @left
-      @mid.walk(path) if @mid
+      @mid.walk(path + @char) if @mid
       @right.walk(path) if @right
     end
   end
 end
-t.root.walk
