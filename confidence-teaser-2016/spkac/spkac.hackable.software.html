@@ -1,0 +1,23 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><link href="spkac.hackable.software-Dateien/socialwidgets.css" type="text/css" rel="stylesheet"></head><body><form action="/" method="POST" id="formId">
+  Message to read:
+  <select name="mid">
+     <option value="welcome">Welcome</option>
+     <option selected="selected" value="flag">Flag</option>
+  </select>
+  <br>
+  Security: <select challenge="readme" name="security" id="keygenId"><option selected="selected">High Grade</option><option>Medium Grade</option></select>
+</form>
+Secret: <input id="secretId" value="readme" type="text">
+<button onclick="setChallenge()">Check!</button>
+<script>
+function setChallenge() {
+    document.getElementById("keygenId").setAttribute('challenge', document.getElementById("secretId").value)
+    document.getElementById("formId").submit();
+}
+</script>
+<br>
+<br>
+<a href="http://spkac.hackable.software:8080/code">code</a>
+<p> Tested on Firefox 45.0 </p>
+</body></html>

@@ -1,0 +1,31 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><link href="spkac.hackable.software_with_key-Dateien/socialwidgets.css" type="text/css" rel="stylesheet"></head><body>Encrypted message:<br> <textarea id="encstr">VZjX/xbF9NECvDu/quCPdA0bEBgmXu1mQNYRBv9GbpT8n7qsCJiQDUUr8Js0AaPJtoo6PVac3rRo34cz1bynpN25FB1sA9BVaYJiXMtgv/lVUFHrq8NZAOGJ0dvO7idhR7jaQyzFCvtQsKHfPFTR1i321qwJtfQuGwR7NfjOcK3pVtUxVE/kw2vkxqwHgig5o9ezLRO4ZDDEQpV9exx2ExeTZsZWaOrTH5zxVShr66LHgmZgevt5zGwbLruoC4JoeCsRcnwxZiAdW2M2jaEbUSYzahnuKx9HDJ7EqzeZpGor/1DxwW379W9RWqbScjUaeskgMRyd4GOEZekczhacGg==</textarea>
+
+<form method="POST" action="/key">
+<input name="security" value="MIICRjCCAS4wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC5FgeCapbr
+RofnvSci2p1fVQvZXMxCGb8zV7W1qviNRRlc+IdwhqKoiHtz3u7ni5qHT82kIpBB
+yr2Pp0j7uW0mlX05Hq63dKHd0S50uEZZYbChmnbkw8cACfVbC6HySXDoUkcbckR+
+NQc2XngqSUdYnkW460LugmQ4uTEUeTKe57v5XIWzfKYXm5CyyunlA/Fa7/jw+apZ
+aneOx+LJEa27hcGazcDB+29ZkEOMPQ5DwUQFRwywZQBbcILLUoA3C0te2uwNq6lB
+20tpDeruL+1STk/4pR4LyXjEfm0XTrXOjS/PqznkGuCxNs3TdS8FOe5pJTgEjgYU
+1h4Ihn0e2Z2lAgMBAAEWBnJlYWRtZTANBgkqhkiG9w0BAQQFAAOCAQEAehTk26Rh
+J+rspXlq6e5j1KVne1dYmvAkt2mwL3hVjvQMCFzE2j7Gb0bC93KkVybpPmNz5PVN
+3wIJnWxxKUJeYUqbxwafnh7pL88oHyANt1+Ut/unxCj6XzosBbhR+boIR0lmzJHT
+KeRi/9+9WIKiWrv0MyCsfNbvEeBm6nevRpFegePr5hRwe5VPFJjpIkx0rhPcCsZs
+GPFC3jh/IkRAmBKRmvqjjpldYZsYgKQIL4O+4fa5mpDLodi3zCgJ988WB/GzFbF8
+cAOzaZpOhN7LvzGYK6EOpwJqycfH5KRTPdX2w9w7Fs/d9zX0H1HTB6nyWiNlDYft
+ATRvQfQFOB/r2w==" type="hidden">
+<input value="Install key" type="submit">
+</form>
+How to read the message:<br>
+<ol type="1">
+<li>Save encrypted message as msg.txt</li>
+<li>Backup cert: <code>Edit -&gt; Preferences -&gt; Advanced -&gt; 
+Certificates -&gt; View Certificates -&gt; Your Certificates -&gt; 
+Backup... -&gt; save as backup.p12</code></li>
+<li>Run commands:
+	<pre>	openssl pkcs12 -in backup.p12 -nocerts -out privateKey.pem
+	base64 -d msg.txt | openssl rsautl -raw -inkey privateKey.pem -decrypt
+	</pre>
+	</li>
+</ol></body></html>
