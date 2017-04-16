@@ -5,6 +5,8 @@ implemented as a ROP chain and we had to reverse it to even be able to disassemb
 the logic parsing the input. There was a second stage too which was basically a
 normal crackme, using the custom arch.
 
+The whole thing took me almost 10 hours to solve, so we were wise not to even
+try working on it on the second day of HITB CTF.
 
 ## Tools
 
@@ -38,6 +40,12 @@ the second stage into stage2.bin.
 ### brute_stage2.cpp
 
 This C++ file brute forces the key for stage2.
+
+Output:
+
+    encrypted: ***** Wow! y0u m4d3 1t! T4ke th1s: HITB{6180a05a8d74f50b504eecd237439a4b} ******
+
+YES.
 
 ### make_debug_ropchain.py
 
