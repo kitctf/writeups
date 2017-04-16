@@ -1,0 +1,581 @@
+00002000    de c0 1b a3      mov bp, 0xc0de
+00002004    10 00 0b f0      shl bp, 0x10
+00002008    d1 22 10 a3      mov r0, banner   # banner
+0000200c    cc 20 00 c3      call print_str
+00002010    00 00 19 a3      mov r9, 0x0
+
+input_loop:
+00002014    50 27 10 a3      mov r0, prompt   # prompt for ingredient
+00002018    cc 20 00 c3      call print_str
+0000201c    45 28 10 a3      mov r0, 0x2845 <input_buf>
+00002020    00 0b 00 a0      mov r0, r0 + bp
+00002024    10 00 11 a3      mov r1, 0x10
+00002028    f4 20 00 c3      call read_str
+0000202c    45 28 10 a3      mov r0, 0x2845 <input_buf>
+00002030    00 00 00 e9      mov r0, byte [r0 + 0x0]
+00002034    84 22 00 c3      call char_to_hex
+00002038    b4 27 18 a3      mov r8, 0x27b4 <key>
+0000203c    00 00 08 a0      mov r8, r8 + r0
+00002040    65 27 10 a3      mov r0, 0x2765   # prompt for tweak
+00002044    cc 20 00 c3      call print_str
+00002048    45 28 10 a3      mov r0, 0x2845 <input_buf>
+0000204c    00 0b 00 a0      mov r0, r0 + bp
+00002050    10 00 11 a3      mov r1, 0x10
+00002054    f4 20 00 c3      call read_str
+00002058    45 28 10 a3      mov r0, 0x2845 <input_buf>
+0000205c    00 00 00 e9      mov r0, byte [r0 + 0x0]
+00002060    84 22 00 c3      call char_to_hex
+00002064    00 00 13 a3      mov r3, 0x0
+00002068    03 08 02 e8      mov r2, byte [r8 + r3]
+0000206c    00 00 02 a1      mov r2, r2 - r0
+00002070    03 08 02 ea      mov byte [r8 + r3], r2
+00002074    01 00 19 a0      mov r9, r9 + 0x1
+00002078    08 00 19 b0      cmp r9, 0x8
+0000207c    14 20 00 c1      jne input_loop
+
+00002080    7a 27 10 a3      mov r0, 0x277a   # ok let's try this recipe...
+00002084    cc 20 00 c3      call print_str
+00002088    b4 27 10 a3      mov r0, 0x27b4 <key>
+0000208c    10 00 11 a3      mov r1, 0x10
+00002090    60 22 00 c3      call byte_sum
+00002094    3b f7 10 a0      mov r0, r0 + 0xf73b
+00002098    ff ff 10 b0      cmp r0, 0xffff
+0000209c    c0 20 00 c1      jne 0x20c0 <horrible>
+
+000020a0    c4 27 10 a3      mov r0, 0x27c4
+000020a4    b4 27 11 a3      mov r1, 0x27b4 <key>
+000020a8    44 28 12 a3      mov r2, 0x2844
+000020ac    00 00 02 a1      mov r2, r2 - r0
+000020b0    28 21 00 c3      call encrypt
+
+000020b4    c4 27 10 a3      mov r0, 0x27c4
+000020b8    cc 20 00 c3      call print_str
+000020bc    00 00 00 ff      halt
+
+horrible:
+000020c0    95 27 10 a3      mov r0, 0x2795     # THAT TASTES TERRIBLE
+000020c4    cc 20 00 c3      call print_str
+000020c8    00 00 00 ff      halt
+
+print_str:
+000020cc    00 00 0d f2      push lr
+000020d0    00 00 04 a3      mov r4, r0
+000020d4    08 21 00 c3      call strlen
+000020d8    00 00 02 a3      mov r2, r0
+000020dc    00 04 01 a3      mov r1, r4
+000020e0    00 0b 01 a0      mov r1, r1 + bp
+000020e4    01 00 10 a3      mov r0, 0x1
+000020e8    04 00 00 d1      syscall 4
+000020ec    00 00 0d f3      pop lr
+000020f0    00 00 00 d0      ret
+
+read_str:
+000020f4    00 01 02 a3      mov r2, r1
+000020f8    00 00 01 a3      mov r1, r0
+000020fc    00 00 10 a3      mov r0, 0x0
+00002100    03 00 00 d1      syscall 3
+00002104    00 00 00 d0      ret
+
+strlen:
+00002108    00 00 11 a3      mov r1, 0x0
+0000210c    01 00 02 e8      mov r2, byte [r0 + r1]
+00002110    00 00 12 b0      cmp r2, 0x0
+00002114    20 21 00 c0      jeq 0x2120
+00002118    01 00 11 a0      mov r1, r1 + 0x1
+0000211c    0c 21 00 c2      jmp 0x210c
+00002120    00 01 00 a3      mov r0, r1
+00002124    00 00 00 d0      ret
+
+# r0 = input
+# r1 = key
+# r2 = len
+
+encrypt:
+00002128    00 00 0d f2      push lr
+0000212c    00 00 04 a3      mov r4, r0
+00002130    00 01 05 a3      mov r5, r1
+00002134    00 02 06 a3      mov r6, r2
+00002138    00 00 17 a3      mov r7, 0x0
+crypt_loop:
+0000213c    00 04 00 a3      mov r0, r4
+00002140    00 05 01 a3      mov r1, r5
+00002144    60 21 00 c3      call block_crypt
+00002148    08 00 14 a0      mov r4, r4 + 0x8
+0000214c    08 00 16 a1      mov r6, r6 - 0x8
+00002150    00 00 16 b0      cmp r6, 0x0
+00002154    3c 21 00 c1      jne crypt_loop
+00002158    00 00 0d f3      pop lr
+0000215c    00 00 00 d0      ret
+
+# r0 = next block
+# r1 = key
+
+block_crypt:
+00002160    00 00 04 f2      push r4
+00002164    00 00 05 f2      push r5
+00002168    00 00 06 f2      push r6
+0000216c    00 00 07 f2      push r7
+00002170    00 00 08 f2      push r8
+00002174    00 00 09 f2      push r9
+00002178    00 00 0a f2      push r10
+0000217c    00 00 0b f2      push bp
+00002180    00 00 0d f2      push lr
+
+# r4 = l, r5 = r
+00002184    00 00 40 e1      mov r4, dword [r0 + 0x0]
+00002188    04 00 50 e1      mov r5, dword [r0 + 0x4]
+
+# r6 = 0x5ba322e0
+0000218c    a3 5b 16 a3      mov r6, 0x5ba3
+00002190    10 00 06 f0      shl r6, 0x10
+00002194    e0 22 16 a0      mov r6, r6 + 0x22e0
+
+
+00002198    00 00 17 a3      mov r7, 0x0
+
+# r3 = 0xbadd1917
+0000219c    dd ba 13 a3      mov r3, 0xbadd
+000021a0    10 00 03 f0      shl r3, 0x10
+000021a4    17 19 13 a0      mov r3, r3 + 0x1917
+
+round_loop:
+000021a8    00 04 02 a3      mov r2, r4
+000021ac    04 00 02 f0      shl r2, 0x4
+000021b0    08 00 d1 e1      mov lr, dword [r1 + 0x8]
+000021b4    00 0d 02 a0      mov r2, r2 + lr
+000021b8    00 04 0d a3      mov lr, r4
+000021bc    00 06 0d a0      mov lr, lr + r6
+000021c0    00 0d 02 a2      mov r2, r2 ^ lr
+000021c4    00 00 02 f2      push r2
+000021c8    00 04 0d a3      mov lr, r4
+000021cc    05 00 0d f1      shr lr, 0x5
+000021d0    0c 00 21 e1      mov r2, dword [r1 + 0xc]
+000021d4    00 02 0d a0      mov lr, lr + r2
+000021d8    00 00 02 f3      pop r2
+000021dc    00 0d 02 a2      mov r2, r2 ^ lr
+
+000021e0    00 02 05 a1      mov r5, r5 - r2
+
+000021e4    00 05 02 a3      mov r2, r5
+000021e8    04 00 02 f0      shl r2, 0x4
+000021ec    00 00 d1 e1      mov lr, dword [r1 + 0x0]
+000021f0    00 0d 02 a0      mov r2, r2 + lr
+000021f4    00 05 0d a3      mov lr, r5
+000021f8    00 06 0d a0      mov lr, lr + r6
+000021fc    00 0d 02 a2      mov r2, r2 ^ lr
+00002200    00 00 02 f2      push r2
+00002204    00 05 0d a3      mov lr, r5
+00002208    05 00 0d f1      shr lr, 0x5
+0000220c    04 00 21 e1      mov r2, dword [r1 + 0x4]
+00002210    00 02 0d a0      mov lr, lr + r2
+00002214    00 00 02 f3      pop r2
+00002218    00 0d 02 a2      mov r2, r2 ^ lr
+
+0000221c    00 02 04 a1      mov r4, r4 - r2
+
+00002220    00 03 06 a1      mov r6, r6 - r3
+00002224    01 00 17 a0      mov r7, r7 + 0x1
+00002228    20 00 17 b0      cmp r7, 0x20
+0000222c    a8 21 00 c1      jne 0x21a8 <round_loop>
+
+00002230    00 00 40 e3      mov dword [r0 + 0x0], r4
+00002234    04 00 50 e3      mov dword [r0 + 0x4], r5
+00002238    00 00 0d f3      pop lr
+0000223c    00 00 0b f3      pop bp
+00002240    00 00 0a f3      pop r10
+00002244    00 00 09 f3      pop r9
+00002248    00 00 08 f3      pop r8
+0000224c    00 00 07 f3      pop r7
+00002250    00 00 06 f3      pop r6
+00002254    00 00 05 f3      pop r5
+00002258    00 00 04 f3      pop r4
+0000225c    00 00 00 d0      ret
+
+byte_sum:
+# r0 = input
+# r1 = len
+00002260    00 00 13 a3      mov r3, 0x0
+00002264    00 00 20 e9      mov r2, byte [r0 + 0x0]
+00002268    00 02 03 a0      mov r3, r3 + r2
+0000226c    01 00 10 a0      mov r0, r0 + 0x1
+00002270    01 00 11 a1      mov r1, r1 - 0x1
+00002274    00 00 11 b0      cmp r1, 0x0
+00002278    64 22 00 c1      jne 0x2264
+0000227c    00 03 00 a3      mov r0, r3
+00002280    00 00 00 d0      ret
+
+char_to_hex:
+00002284    00 00 11 a3      mov r1, 0x0
+00002288    b8 22 12 a3      mov r2, 0x22b8            # 0..9..a..f
+0000228c    00 00 13 a3      mov r3, 0x0
+00002290    03 02 03 e8      mov r3, byte [r2 + r3]
+00002294    00 03 00 b0      cmp r0, r3
+00002298    b0 22 00 c0      jeq 0x22b0
+0000229c    01 00 12 a0      mov r2, r2 + 0x1
+000022a0    01 00 11 a0      mov r1, r1 + 0x1
+000022a4    10 00 11 b0      cmp r1, 0x10
+000022a8    8c 22 00 c1      jne 0x228c
+000022ac    01 00 11 a1      mov r1, r1 - 0x1
+000022b0    00 01 00 a3      mov r0, r1
+000022b4    00 00 00 d0      ret
+
+
+000022b8    30 31 32 33      <unknown>
+000022bc    34 35 36 37      <unknown>
+000022c0    38 39 61 62      <unknown>
+000022c4    63 64 65 66      <unknown>
+000022c8    00 6c 6f 6c      <unknown>
+000022cc    68 61 78 0a      <unknown>
+000022d0    00 0a 0a 0a      <unknown>
+000022d4    20 20 20 20      <unknown>
+000022d8    20 20 20 20      <unknown>
+000022dc    20 20 20 20      <unknown>
+000022e0    20 20 5f 2c      <unknown>
+000022e4    2e 5f 20 20      <unknown>
+000022e8    20 20 20 20      <unknown>
+000022ec    0a 20 20 2e      <unknown>
+000022f0    7c 7c 2c 20      <unknown>
+000022f4    20 20 20 20      <unknown>
+000022f8    20 20 2f 5f      <unknown>
+000022fc    20 5f 5c 5c      <unknown>
+00002300    20 20 20 20      <unknown>
+00002304    20 0a 20 5c      <unknown>
+00002308    2e 60 27 2c      <unknown>
+0000230c    2f 20 20 20      <unknown>
+00002310    20 20 20 7c      <unknown>
+00002314    27 4c 27 7c      <unknown>
+00002318    20 7c 20 20      <unknown>
+0000231c    20 20 0a 20      <unknown>
+00002320    3d 20 2c 2e      <unknown>
+00002324    20 3d 20 20      <unknown>
+00002328    20 20 20 20      <unknown>
+0000232c    7c 20 2d 2c      <unknown>
+00002330    7c 20 4c 20      <unknown>
+00002334    20 20 20 0a      <unknown>
+00002338    20 2f 20 7c      <unknown>
+0000233c    7c 20 5c 20      <unknown>
+00002340    20 20 20 2c      <unknown>
+00002344    2d 27 5c 22      <unknown>
+00002348    2f 2c 27 60      <unknown>
+0000234c    2e 20 20 20      <unknown>
+00002350    0a 20 20 20      <unknown>
+00002354    7c 7c 20 20      <unknown>
+00002358    20 20 20 2c      <unknown>
+0000235c    27 20 20 20      <unknown>
+00002360    60 2c 2c 2e      <unknown>
+00002364    20 60 2e 20      <unknown>
+00002368    20 0a 20 20      <unknown>
+0000236c    20 2c 7c 5f      <unknown>
+00002370    5f 5f 5f 2c      <unknown>
+00002374    27 20 2c 20      <unknown>
+00002378    2c 3b 27 20      <unknown>
+0000237c    5c 7c 20 7c      <unknown>
+00002380    20 20 20 20      <unknown>
+00002384    3c 2d 2d 20      <unknown>
+00002388    30 62 69 20      <unknown>
+0000238c    50 57 4e 20      <unknown>
+00002390    6b 33 6e 30      <unknown>
+00002394    62 31 0a 20      <unknown>
+00002398    20 28 33 7c      <unknown>
+0000239c    5c 20 20 20      <unknown>
+000023a0    20 5f 2f 7c      <unknown>
+000023a4    2f 27 20 20      <unknown>
+000023a8    20 5f 7c 20      <unknown>
+000023ac    7c 20 20 0a      <unknown>
+000023b0    20 20 20 7c      <unknown>
+000023b4    7c 2f 2c 2d      <unknown>
+000023b8    27 27 20 20      <unknown>
+000023bc    7c 20 3e 2d      <unknown>
+000023c0    27 27 20 5f      <unknown>
+000023c4    2c 5c 5c 20      <unknown>
+000023c8    0a 20 20 20      <unknown>
+000023cc    7c 7c 27 20      <unknown>
+000023d0    20 20 20 20      <unknown>
+000023d4    20 3d 3d 5c      <unknown>
+000023d8    20 2c 2d 27      <unknown>
+000023dc    20 20 2c 27      <unknown>
+000023e0    20 0a 20 20      <unknown>
+000023e4    20 7c 7c 20      <unknown>
+000023e8    20 20 20 20      <unknown>
+000023ec    20 20 7c 20      <unknown>
+000023f0    20 56 20 5c      <unknown>
+000023f4    20 2c 7c 20      <unknown>
+000023f8    20 20 0a 20      <unknown>
+000023fc    20 20 7c 7c      <unknown>
+00002400    20 20 20 20      <unknown>
+00002404    20 20 20 7c      <unknown>
+00002408    20 20 20 20      <unknown>
+0000240c    7c 60 20 7c      <unknown>
+00002410    20 20 20 0a      <unknown>
+00002414    20 20 20 7c      <unknown>
+00002418    7c 20 20 20      <unknown>
+0000241c    20 20 20 20      <unknown>
+00002420    7c 20 20 20      <unknown>
+00002424    20 7c 20 20      <unknown>
+00002428    20 5c 20 20      <unknown>
+0000242c    0a 20 20 20      <unknown>
+00002430    7c 7c 20 20      <unknown>
+00002434    20 20 20 20      <unknown>
+00002438    20 7c 20 20      <unknown>
+0000243c    20 20 5c 20      <unknown>
+00002440    20 20 20 5c      <unknown>
+00002444    20 0a 20 20      <unknown>
+00002448    20 7c 7c 20      <unknown>
+0000244c    20 20 20 20      <unknown>
+00002450    20 20 7c 20      <unknown>
+00002454    20 20 20 20      <unknown>
+00002458    7c 20 20 20      <unknown>
+0000245c    20 5c 0a 20      <unknown>
+00002460    20 20 7c 7c      <unknown>
+00002464    20 20 20 20      <unknown>
+00002468    20 20 20 7c      <unknown>
+0000246c    20 20 20 20      <unknown>
+00002470    20 20 5c 5f      <unknown>
+00002474    2c 2d 27 0a      <unknown>
+00002478    20 20 20 7c      <unknown>
+0000247c    7c 20 20 20      <unknown>
+00002480    20 20 20 20      <unknown>
+00002484    7c 5f 5f 5f      <unknown>
+00002488    2c 2c 2d 2d      <unknown>
+0000248c    22 29 5f 5c      <unknown>
+00002490    0a 20 20 20      <unknown>
+00002494    7c 7c 20 20      <unknown>
+00002498    20 20 20 20      <unknown>
+0000249c    20 20 20 7c      <unknown>
+000024a0    5f 7c 20 20      <unknown>
+000024a4    20 63 63 63      <unknown>
+000024a8    2f 0a 20 20      <unknown>
+000024ac    20 7c 7c 20      <unknown>
+000024b0    20 20 20 20      <unknown>
+000024b4    20 20 20 63      <unknown>
+000024b8    63 63 2f 20      <unknown>
+000024bc    20 20 20 20      <unknown>
+000024c0    20 20 0a 20      <unknown>
+000024c4    20 20 7c 7c      <unknown>
+000024c8    20 20 20 20      <unknown>
+000024cc    20 20 20 20      <unknown>
+000024d0    20 20 20 20      <unknown>
+000024d4    20 20 20 20      <unknown>
+000024d8    0a 0a 20 20      <unknown>
+000024dc    20 57 45 4c      <unknown>
+000024e0    4c 20 44 4f      <unknown>
+000024e4    4e 45 2c 20      <unknown>
+000024e8    59 4f 55 4e      <unknown>
+000024ec    47 20 50 41      <unknown>
+000024f0    44 41 57 41      <unknown>
+000024f4    4e 2e 0a 20      <unknown>
+000024f8    20 20 42 45      <unknown>
+000024fc    46 4f 52 45      <unknown>
+00002500    20 49 20 47      <unknown>
+00002504    49 56 45 20      <unknown>
+00002508    59 4f 55 20      <unknown>
+0000250c    59 4f 55 52      <unknown>
+00002510    20 54 4f 4b      <unknown>
+00002514    45 4e 0a 20      <unknown>
+00002518    20 20 4f 46      <unknown>
+0000251c    20 41 50 50      <unknown>
+00002520    52 45 43 49      <unknown>
+00002524    41 54 49 4f      <unknown>
+00002528    4e 2c 20 49      <unknown>
+0000252c    20 57 41 4e      <unknown>
+00002530    54 20 59 4f      <unknown>
+00002534    55 0a 20 20      <unknown>
+00002538    20 54 4f 20      <unknown>
+0000253c    53 48 4f 57      <unknown>
+00002540    20 4d 45 20      <unknown>
+00002544    59 4f 55 52      <unknown>
+00002548    20 50 45 52      <unknown>
+0000254c    53 49 53 54      <unknown>
+00002550    45 4e 54 20      <unknown>
+00002554    0a 20 20 20      <unknown>
+00002558    41 4e 44 20      <unknown>
+0000255c    57 49 4c 4c      <unknown>
+00002560    49 4e 47 20      <unknown>
+00002564    41 42 49 4c      <unknown>
+00002568    49 54 49 45      <unknown>
+0000256c    53 20 4f 4e      <unknown>
+00002570    45 0a 20 20      <unknown>
+00002574    20 4d 4f 52      <unknown>
+00002578    45 20 54 49      <unknown>
+0000257c    4d 45 2e 0a      <unknown>
+00002580    0a 20 20 20      <unknown>
+00002584    57 45 20 4e      <unknown>
+00002588    45 45 44 20      <unknown>
+0000258c    59 4f 55 20      <unknown>
+00002590    54 4f 20 55      <unknown>
+00002594    53 45 20 54      <unknown>
+00002598    48 45 20 46      <unknown>
+0000259c    4f 52 43 45      <unknown>
+000025a0    20 41 4e 44      <unknown>
+000025a4    20 4d 4f 56      <unknown>
+000025a8    45 20 41 57      <unknown>
+000025ac    41 59 0a 20      <unknown>
+000025b0    20 20 54 48      <unknown>
+000025b4    49 53 20 47      <unknown>
+000025b8    49 47 41 4e      <unknown>
+000025bc    54 49 43 20      <unknown>
+000025c0    42 4f 55 4c      <unknown>
+000025c4    44 45 52 20      <unknown>
+000025c8    53 48 49 45      <unknown>
+000025cc    4c 44 49 4e      <unknown>
+000025d0    47 20 54 48      <unknown>
+000025d4    45 20 53 45      <unknown>
+000025d8    43 52 45 54      <unknown>
+000025dc    0a 20 20 20      <unknown>
+000025e0    59 4f 55 20      <unknown>
+000025e4    53 45 45 4b      <unknown>
+000025e8    2e 0a 0a 20      <unknown>
+000025ec    20 20 48 4f      <unknown>
+000025f0    57 45 56 45      <unknown>
+000025f4    52 2c 20 59      <unknown>
+000025f8    4f 55 52 20      <unknown>
+000025fc    53 54 41 4d      <unknown>
+00002600    49 4e 41 20      <unknown>
+00002604    53 45 45 4d      <unknown>
+00002608    53 20 54 4f      <unknown>
+0000260c    20 42 45 20      <unknown>
+00002610    56 45 52 59      <unknown>
+00002614    20 4c 4f 57      <unknown>
+00002618    20 0a 20 20      <unknown>
+0000261c    20 41 46 54      <unknown>
+00002620    45 52 20 59      <unknown>
+00002624    4f 55 52 20      <unknown>
+00002628    50 52 45 56      <unknown>
+0000262c    49 4f 55 53      <unknown>
+00002630    20 45 46 46      <unknown>
+00002634    4f 52 54 53      <unknown>
+00002638    21 0a 0a 20      <unknown>
+0000263c    20 20 57 45      <unknown>
+00002640    27 52 45 20      <unknown>
+00002644    47 4f 4e 4e      <unknown>
+00002648    41 20 44 45      <unknown>
+0000264c    41 4c 20 57      <unknown>
+00002650    49 54 48 20      <unknown>
+00002654    54 48 49 53      <unknown>
+00002658    20 42 59 20      <unknown>
+0000265c    43 4f 4f 4b      <unknown>
+00002660    49 4e 47 20      <unknown>
+00002664    55 50 20 41      <unknown>
+00002668    0a 20 20 20      <unknown>
+0000266c    53 50 45 43      <unknown>
+00002670    49 41 4c 20      <unknown>
+00002674    50 4f 54 49      <unknown>
+00002678    4f 4e 2e 20      <unknown>
+0000267c    49 20 48 41      <unknown>
+00002680    56 45 20 54      <unknown>
+00002684    48 45 20 52      <unknown>
+00002688    45 43 49 50      <unknown>
+0000268c    45 20 4d 4f      <unknown>
+00002690    53 54 4c 59      <unknown>
+00002694    20 57 4f 52      <unknown>
+00002698    4b 45 44 0a      <unknown>
+0000269c    20 20 20 4f      <unknown>
+000026a0    55 54 20 42      <unknown>
+000026a4    55 54 20 45      <unknown>
+000026a8    49 47 48 54      <unknown>
+000026ac    20 4f 46 20      <unknown>
+000026b0    54 48 45 20      <unknown>
+000026b4    49 4e 47 52      <unknown>
+000026b8    45 44 49 45      <unknown>
+000026bc    4e 54 53 20      <unknown>
+000026c0    4e 45 45 44      <unknown>
+000026c4    20 41 20 4c      <unknown>
+000026c8    49 54 54 4c      <unknown>
+000026cc    45 0a 20 20      <unknown>
+000026d0    20 54 57 45      <unknown>
+000026d4    41 4b 49 4e      <unknown>
+000026d8    47 2e 20 53      <unknown>
+000026dc    50 45 43 49      <unknown>
+000026e0    46 59 20 54      <unknown>
+000026e4    48 45 20 49      <unknown>
+000026e8    4e 47 52 45      <unknown>
+000026ec    44 49 45 4e      <unknown>
+000026f0    54 20 4e 55      <unknown>
+000026f4    4d 42 45 52      <unknown>
+000026f8    53 20 28 49      <unknown>
+000026fc    4e 20 48 45      <unknown>
+00002700    58 29 0a 20      <unknown>
+00002704    20 20 41 4e      <unknown>
+00002708    44 20 54 48      <unknown>
+0000270c    45 49 52 20      <unknown>
+00002710    41 43 43 4f      <unknown>
+00002714    4d 50 41 4e      <unknown>
+00002718    59 49 4e 47      <unknown>
+0000271c    20 54 57 45      <unknown>
+00002720    41 4b 20 56      <unknown>
+00002724    41 4c 55 45      <unknown>
+00002728    53 20 54 4f      <unknown>
+0000272c    20 53 45 45      <unknown>
+00002730    20 49 46 20      <unknown>
+00002734    57 45 0a 20      <unknown>
+00002738    20 20 43 41      <unknown>
+0000273c    4e 20 57 4f      <unknown>
+00002740    52 4b 20 54      <unknown>
+00002744    48 49 53 20      <unknown>
+00002748    4f 55 54 2e      <unknown>
+0000274c    0a 0a 0a 00      <unknown>
+00002750    49 4e 47 52      <unknown>
+00002754    45 44 49 45      <unknown>
+00002758    4e 54 20 28      <unknown>
+0000275c    30 2d 66 29      <unknown>
+00002760    20 20 3e 20      <unknown>
+00002764    00 54 57 45      <unknown>
+00002768    41 4b 20 56      <unknown>
+0000276c    41 4c 55 45      <unknown>
+00002770    20 28 30 2d      <unknown>
+00002774    34 29 20 3e      <unknown>
+00002778    20 00 4f 4b      <unknown>
+0000277c    20 4c 45 54      <unknown>
+00002780    53 20 54 52      <unknown>
+00002784    59 20 54 48      <unknown>
+00002788    49 53 20 52      <unknown>
+0000278c    45 43 49 50      <unknown>
+00002790    45 2e 2e 0a      <unknown>
+00002794    00 55 47 48      <unknown>
+00002798    2e 2e 20 54      <unknown>
+0000279c    48 41 54 20      <unknown>
+000027a0    54 41 53 54      <unknown>
+000027a4    45 53 20 48      <unknown>
+000027a8    4f 52 52 49      <unknown>
+000027ac    42 4c 45 20      <unknown>
+000027b0    3a 28 0a 00      <unknown>
+000027b4    df f1 a2 5b      <unknown>
+000027b8    fa 4c 26 74      <unknown>
+000027bc    e5 df 1a b6      <unknown>
+000027c0    5e 62 85 4d      <unknown>
+000027c4    68 5d f9 d0      ret
+000027c8    c4 10 39 d6      <unknown>
+000027cc    a6 cf ac 96      <unknown>
+000027d0    c0 c5 e8 45      <unknown>
+000027d4    f2 cc 3a ea      mov byte [r204 + r242], r58
+000027d8    8f e4 01 19      <unknown>
+000027dc    b4 ec 5f 04      <unknown>
+000027e0    c4 00 0b b8      <unknown>
+000027e4    65 ba 0d 5e      <unknown>
+000027e8    7a ba 77 6b      <unknown>
+000027ec    d9 c7 10 b0      cmp r0, 0xc7d9
+000027f0    bd 8b 45 8e      <unknown>
+000027f4    04 ce 45 16      <unknown>
+000027f8    c8 04 e0 6d      <unknown>
+000027fc    8d 24 7a 0b      <unknown>
+00002800    c0 94 c8 be      <unknown>
+00002804    1b 08 52 68      <unknown>
+00002808    47 dc a9 e1      mov r10, dword [r9 + 0xdc47]
+0000280c    2f e5 60 26      <unknown>
+00002810    bf bc bf 88      <unknown>
+00002814    af b6 64 fe      <unknown>
+00002818    9c 60 7f 29      <unknown>
+0000281c    84 06 21 d3      <unknown>
+00002820    ae 99 a0 45      <unknown>
+00002824    08 f7 c6 be      <unknown>
+00002828    0a bd 24 58      <unknown>
+0000282c    e5 69 a1 d7      <unknown>
+00002830    04 47 6e 42      <unknown>
+00002834    8b 29 a0 b8      <unknown>
+00002838    e7 d6 35 77      <unknown>
+0000283c    0f 32 65 6f      <unknown>
+00002840    0e bf 6e eb      mov byte [pc + 0xbf0e], r6
+00002844    00 00 00 00      <unknown>
+00002848    00 00 00 00      <unknown>
+0000284c    00 00 00 00      <unknown>
+00002850    00 00 00 00      <unknown>

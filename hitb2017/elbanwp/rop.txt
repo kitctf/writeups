@@ -1,0 +1,3097 @@
+l00000000:   804889e  mov eax, l00001eec
+             8048480
+                1ee8
+             80680c7
+            44444444
+l00000014:   804890e  mov ebx, eax
+l00000018:   80b8196  mov eax, 0x5a
+                  5a
+l00000020:   806f5f0  int 0x80
+l00000024:   805c4a0  jmp memset
+l00000028:   804847e  mov ebx, 0xc0de0000 ; mov esi, 0x0 ; mov edi, 0x8000
+            c0de0000
+                   0
+                8000
+l00000038:   804889e  mov eax, l00000074
+             8048480
+                  38
+             80680c7
+            44444444
+l0000004c:   8048907  mov edx, eax
+l00000050:   804889e  mov eax, l00001f04
+             8048480
+                1eb0
+             80680c7
+            44444444
+l00000064:   8048a0a  mov dword [edx], eax
+l00000068:   805c660  jmp memcpy
+l0000006c:   804847e  mov ebx, 0xc0de0000 ; mov esi, 0x0 ; mov edi, 0xe34
+            c0de0000
+                   0     # ref from l00000038
+                 e34
+l0000007c:   80b8196  mov eax, 0x7000
+                7000
+l00000084:   806efea  mov edx, 0xc0de7030
+            c0de7030
+l0000008c:   8048a0a  mov dword [edx], eax
+l00000090:   80b8196  mov eax, [0xc0de7038]
+            c0de7034
+             809ca00
+l0000009c:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l000000a4:   80680c7  add eax, edi ; mov edi, 0x44444444
+            44444444
+l000000ac:   8048480  mov edi, 0x3
+                   3
+l000000b4:   80680c7  add eax, edi ; mov edi, 0x55555555
+            55555555
+l000000bc:   80489ef  mov al, byte [eax] ; and eax, 0x000000FF
+l000000c0:   806efea  mov edx, 0xc0de7040
+            c0de7040
+l000000c8:   8048a0a  mov dword [edx], eax
+l000000cc:   80b8196  mov eax, [0xc0de7038]
+            c0de7034
+             809ca00
+l000000d8:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l000000e0:   80680c7  add eax, edi ; mov edi, 0x44444444
+            44444444
+l000000e8:   8048480  mov edi, 0x2
+                   2
+l000000f0:   80680c7  add eax, edi ; mov edi, 0x55555555
+            55555555
+l000000f8:   80489ef  mov al, byte [eax] ; and eax, 0x000000FF
+l000000fc:   806efea  mov edx, 0xc0de7044
+            c0de7044
+l00000104:   8048a0a  mov dword [edx], eax
+l00000108:   80b8196  mov eax, [0xc0de7038]
+            c0de7034
+             809ca00
+l00000114:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l0000011c:   80680c7  add eax, edi ; mov edi, 0x44444444
+            44444444
+l00000124:   8048480  mov edi, 0x1
+                   1
+l0000012c:   80680c7  add eax, edi ; mov edi, 0x55555555
+            55555555
+l00000134:   80489ef  mov al, byte [eax] ; and eax, 0x000000FF
+l00000138:   806efea  mov edx, 0xc0de7048
+            c0de7048
+l00000140:   8048a0a  mov dword [edx], eax
+l00000144:   80b8196  mov eax, [0xc0de7038]
+            c0de7034
+             809ca00
+l00000150:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l00000158:   80680c7  add eax, edi ; mov edi, 0x44444444
+            44444444
+l00000160:   8048480  mov edi, 0x0
+                   0
+l00000168:   80680c7  add eax, edi ; mov edi, 0x55555555
+            55555555
+l00000170:   80489ef  mov al, byte [eax] ; and eax, 0x000000FF
+l00000174:   806efea  mov edx, 0xc0de704c
+            c0de704c
+l0000017c:   8048a0a  mov dword [edx], eax
+l00000180:   80b8196  mov eax, [0xc0de7038]
+            c0de7034
+             809ca00
+l0000018c:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l00000194:   80680c7  add eax, edi ; mov edi, 0x44444444
+            44444444
+l0000019c:   8048480  mov edi, 0x0
+                   0
+l000001a4:   80680c7  add eax, edi ; mov edi, 0x55555555
+            55555555
+l000001ac:   80489f7  mov ax, word [eax] ; and eax, 0x0000FFFF
+l000001b0:   806efea  mov edx, 0xc0de7050
+            c0de7050
+l000001b8:   8048a0a  mov dword [edx], eax
+
+
+# clear jmpflag
+l000001bc:   80b8196  mov eax, 0x0
+                   0
+l000001c4:   806efea  mov edx, 0xc0de7054
+            c0de7054
+l000001cc:   8048a0a  mov dword [edx], eax
+
+
+
+# opcode a0
+l000001d0:   80b8196  mov eax, [0xc0de7040]
+            c0de703c
+             809ca00
+l000001dc:   804f1fc  mov ebx, 0xa0
+                  a0
+l000001e4:   8048433  cmp eax, ebx ; jnz l00000364
+                 16c
+             80489ed
+             80489e7
+             80489d9
+l000001f8:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00000204:   80489ed  mov ecx, 0x10
+                  10
+l0000020c:   80489ea  and eax, ecx
+l00000210:   804f1fc  mov ebx, 0x10
+                  10
+l00000218:   8048433  cmp eax, ebx ; jnz l000002a4
+                  78
+             80489ed
+             80489e7
+             80489d9
+
+# if a1 & 0x10 == 0x10
+l0000022c:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+#    a1 &= 0xf
+l00000238:   80489ed  mov ecx, 0xf
+                   f
+l00000240:   80489ea  and eax, ecx
+l00000244:   806efea  mov edx, 0xc0de7044
+            c0de7044
+l0000024c:   8048a0a  mov dword [edx], eax
+l00000250:   8048480  mov edi, 0x4
+                   4
+l00000258:   8048a10  mul edi
+l0000025c:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000264:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+
+# store computed register address in @58
+l0000026c:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l00000274:   8048a0a  mov dword [edx], eax
+l00000278:   8048a00  mov eax, dword [eax]
+
+# store reg value in @5c, edi = eax = b1
+l0000027c:   806efea  mov edx, 0xc0de705c
+            c0de705c
+l00000284:   8048a0a  mov dword [edx], eax
+l00000288:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00000294:   8048a03  mov edi, eax
+l00000298:   8048433  jmp l00000318
+                  74
+             80489e7
+
+# a1 & 0x10 != 0x10
+
+# @58 = register location
+l000002a4:   80b8196  mov eax, [0xc0de7044]     # jmp from l00000218
+            c0de7040
+             809ca00
+l000002b0:   8048480  mov edi, 0x4
+                   4
+l000002b8:   8048a10  mul edi
+l000002bc:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000002c4:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000002cc:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l000002d4:   8048a0a  mov dword [edx], eax
+
+
+# @5c = register value
+l000002d8:   8048a00  mov eax, dword [eax]
+l000002dc:   806efea  mov edx, 0xc0de705c
+            c0de705c
+l000002e4:   8048a0a  mov dword [edx], eax
+
+# eax = ebx = value of regs[a2]
+l000002e8:   80b8196  mov eax, [0xc0de7048]
+            c0de7044
+             809ca00
+l000002f4:   8048480  mov edi, 0x4
+                   4
+l000002fc:   8048a10  mul edi
+l00000300:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000308:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000310:   8048a00  mov eax, dword [eax]
+l00000314:   8048a03  mov edi, eax
+
+
+# type 1
+# @58 = register location
+# @5c = reg value
+# eax = edi = b1
+#   -> mov regs[a1], regs[a1] + b1
+#
+# type 2
+# @58 = register location
+# @5c = reg value
+# eax = edi = value of reg 2
+#   -> mov regs[a1], regs[a1] + regs[a2]
+#
+l00000318:   80b8196  mov eax, [0xc0de705c]     # jmp from l00000298
+            c0de7058
+             809ca00
+l00000324:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l0000032c:   806efea  mov edx, 0xc0de7060
+            c0de7060
+l00000334:   8048a0a  mov dword [edx], eax
+l00000338:   80b8196  mov eax, [0xc0de7058]
+            c0de7054
+             809ca00
+l00000344:   8048907  mov edx, eax
+l00000348:   80b8196  mov eax, [0xc0de7060]
+            c0de705c
+             809ca00
+l00000354:   8048a0a  mov dword [edx], eax
+l00000358:   8048433  nop
+                   0
+             80489e7
+
+# opcode a1
+l00000364:   80b8196  mov eax, [0xc0de7040]     # jmp from l000001e4
+            c0de703c
+             809ca00
+l00000370:   804f1fc  mov ebx, 0xa1
+                  a1
+l00000378:   8048433  cmp eax, ebx ; jnz l000004f4
+                 168
+             80489ed
+             80489e7
+             80489d9
+l0000038c:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00000398:   80489ed  mov ecx, 0x10
+                  10
+l000003a0:   80489ea  and eax, ecx
+l000003a4:   804f1fc  mov ebx, 0x10
+                  10
+l000003ac:   8048433  cmp eax, ebx ; jnz l00000438
+                  78
+             80489ed
+             80489e7
+             80489d9
+
+# type 1 (a1 & 0x10)
+l000003c0:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l000003cc:   80489ed  mov ecx, 0xf
+                   f
+l000003d4:   80489ea  and eax, ecx
+l000003d8:   806efea  mov edx, 0xc0de7044
+            c0de7044
+l000003e0:   8048a0a  mov dword [edx], eax
+l000003e4:   8048480  mov edi, 0x4
+                   4
+l000003ec:   8048a10  mul edi
+l000003f0:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000003f8:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+
+# @58 = register location
+l00000400:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l00000408:   8048a0a  mov dword [edx], eax
+l0000040c:   8048a00  mov eax, dword [eax]
+
+# @5c = register value
+l00000410:   806efea  mov edx, 0xc0de705c
+            c0de705c
+l00000418:   8048a0a  mov dword [edx], eax
+
+# edi = b1
+l0000041c:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00000428:   8048a03  mov edi, eax
+l0000042c:   8048433  jmp l000004ac
+                  74
+             80489e7
+
+# type 2 (a1 & 0x10)
+l00000438:   80b8196  mov eax, [0xc0de7044]     # jmp from l000003ac
+            c0de7040
+             809ca00
+l00000444:   8048480  mov edi, 0x4
+                   4
+l0000044c:   8048a10  mul edi
+l00000450:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000458:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000460:   806efea  mov edx, 0xc0de7058
+            c0de7058
+
+# @58 = register location
+l00000468:   8048a0a  mov dword [edx], eax
+l0000046c:   8048a00  mov eax, dword [eax]
+
+# @5c = register value
+l00000470:   806efea  mov edx, 0xc0de705c
+            c0de705c
+l00000478:   8048a0a  mov dword [edx], eax
+
+l0000047c:   80b8196  mov eax, [0xc0de7048]
+            c0de7044
+             809ca00
+l00000488:   8048480  mov edi, 0x4
+                   4
+l00000490:   8048a10  mul edi
+l00000494:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l0000049c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000004a4:   8048a00  mov eax, dword [eax]
+# edi = value of register 2
+l000004a8:   8048a03  mov edi, eax
+
+# common
+l000004ac:   80b8196  mov eax, [0xc0de705c]     # jmp from l0000042c
+            c0de7058
+             809ca00
+l000004b8:   8048a13  sub eax, edi
+l000004bc:   806efea  mov edx, 0xc0de7060
+            c0de7060
+l000004c4:   8048a0a  mov dword [edx], eax
+l000004c8:   80b8196  mov eax, [0xc0de7058]
+            c0de7054
+             809ca00
+l000004d4:   8048907  mov edx, eax
+l000004d8:   80b8196  mov eax, [0xc0de7060]
+            c0de705c
+             809ca00
+l000004e4:   8048a0a  mov dword [edx], eax
+l000004e8:   8048433  nop
+                   0
+             80489e7
+
+# opcode a2
+l000004f4:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000378
+            c0de703c
+             809ca00
+l00000500:   804f1fc  mov ebx, 0xa2
+                  a2
+l00000508:   8048433  cmp eax, ebx ; jnz l00000684
+                 168
+             80489ed
+             80489e7
+             80489d9
+l0000051c:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00000528:   80489ed  mov ecx, 0x10
+                  10
+l00000530:   80489ea  and eax, ecx
+l00000534:   804f1fc  mov ebx, 0x10
+                  10
+l0000053c:   8048433  cmp eax, ebx ; jnz l000005c8
+                  78
+             80489ed
+             80489e7
+             80489d9
+
+# type 1: a1&0x10 == 0x10
+l00000550:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l0000055c:   80489ed  mov ecx, 0xf
+                   f
+l00000564:   80489ea  and eax, ecx
+l00000568:   806efea  mov edx, 0xc0de7044
+            c0de7044
+l00000570:   8048a0a  mov dword [edx], eax
+l00000574:   8048480  mov edi, 0x4
+                   4
+l0000057c:   8048a10  mul edi
+l00000580:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000588:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+
+# @58 = register a1 location, @5c = value
+l00000590:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l00000598:   8048a0a  mov dword [edx], eax
+l0000059c:   8048a00  mov eax, dword [eax]
+l000005a0:   806efea  mov edx, 0xc0de705c
+            c0de705c
+l000005a8:   8048a0a  mov dword [edx], eax
+l000005ac:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+# edi = b1
+l000005b8:   8048a03  mov edi, eax
+l000005bc:   8048433  jmp l0000063c
+                  74
+             80489e7
+
+# type 2: !(a1 & 0x10)
+l000005c8:   80b8196  mov eax, [0xc0de7044]     # jmp from l0000053c
+            c0de7040
+             809ca00
+l000005d4:   8048480  mov edi, 0x4
+                   4
+l000005dc:   8048a10  mul edi
+l000005e0:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000005e8:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000005f0:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l000005f8:   8048a0a  mov dword [edx], eax
+l000005fc:   8048a00  mov eax, dword [eax]
+l00000600:   806efea  mov edx, 0xc0de705c
+            c0de705c
+l00000608:   8048a0a  mov dword [edx], eax
+l0000060c:   80b8196  mov eax, [0xc0de7048]
+            c0de7044
+             809ca00
+l00000618:   8048480  mov edi, 0x4
+                   4
+l00000620:   8048a10  mul edi
+l00000624:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l0000062c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000634:   8048a00  mov eax, dword [eax]
+l00000638:   8048a03  mov edi, eax
+l0000063c:   80b8196  mov eax, [0xc0de705c]     # jmp from l000005bc
+            c0de7058
+             809ca00
+l00000648:   8048a16  xor eax, edi
+l0000064c:   806efea  mov edx, 0xc0de7060
+            c0de7060
+l00000654:   8048a0a  mov dword [edx], eax
+l00000658:   80b8196  mov eax, [0xc0de7058]
+            c0de7054
+             809ca00
+l00000664:   8048907  mov edx, eax
+l00000668:   80b8196  mov eax, [0xc0de7060]
+            c0de705c
+             809ca00
+l00000674:   8048a0a  mov dword [edx], eax
+l00000678:   8048433  nop
+                   0
+             80489e7
+
+# opcode a3
+l00000684:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000508
+            c0de703c
+             809ca00
+l00000690:   804f1fc  mov ebx, 0xa3
+                  a3
+l00000698:   8048433  cmp eax, ebx ; jnz l000007f4
+                 148
+             80489ed
+             80489e7
+             80489d9
+
+l000006ac:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l000006b8:   80489ed  mov ecx, 0x10
+                  10
+l000006c0:   80489ea  and eax, ecx
+l000006c4:   804f1fc  mov ebx, 0x10
+                  10
+l000006cc:   8048433  cmp eax, ebx ; jnz l00000748
+                  68
+             80489ed
+             80489e7
+             80489d9
+
+# type 1
+# @58 = value of reg
+# edi = b1
+l000006e0:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l000006ec:   80489ed  mov ecx, 0xf
+                   f
+l000006f4:   80489ea  and eax, ecx
+l000006f8:   806efea  mov edx, 0xc0de7044
+            c0de7044
+l00000700:   8048a0a  mov dword [edx], eax
+l00000704:   8048480  mov edi, 0x4
+                   4
+l0000070c:   8048a10  mul edi
+l00000710:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000718:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000720:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l00000728:   8048a0a  mov dword [edx], eax
+l0000072c:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00000738:   8048a03  mov edi, eax
+l0000073c:   8048433  jmp l000007ac
+                  64
+             80489e7
+
+# type 2
+l00000748:   80b8196  mov eax, [0xc0de7044]     # jmp from l000006cc
+            c0de7040
+             809ca00
+l00000754:   8048480  mov edi, 0x4
+                   4
+l0000075c:   8048a10  mul edi
+l00000760:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000768:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000770:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l00000778:   8048a0a  mov dword [edx], eax
+l0000077c:   80b8196  mov eax, [0xc0de7048]
+            c0de7044
+             809ca00
+l00000788:   8048480  mov edi, 0x4
+                   4
+l00000790:   8048a10  mul edi
+l00000794:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l0000079c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000007a4:   8048a00  mov eax, dword [eax]
+l000007a8:   8048a03  mov edi, eax
+
+# common path
+#
+# type 1
+# @58 = location of dest reg p1
+# edi = b1
+#
+# type 2
+# @58 = location of dest reg
+# edi = value of reg p2
+l000007ac:   80b8196  mov eax, 0x0     # jmp from l0000073c
+                   0
+l000007b4:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l000007bc:   806efea  mov edx, 0xc0de7060
+            c0de7060
+l000007c4:   8048a0a  mov dword [edx], eax
+l000007c8:   80b8196  mov eax, [0xc0de7058]
+            c0de7054
+             809ca00
+l000007d4:   8048907  mov edx, eax
+l000007d8:   80b8196  mov eax, [0xc0de7060]
+            c0de705c
+             809ca00
+l000007e4:   8048a0a  mov dword [edx], eax
+l000007e8:   8048433  nop
+                   0
+             80489e7
+
+# opcode b0
+l000007f4:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000698
+            c0de703c
+             809ca00
+l00000800:   804f1fc  mov ebx, 0xb0
+                  b0
+l00000808:   8048433  cmp eax, ebx ; jnz l00000984
+                 168
+             80489ed
+             80489e7
+             80489d9
+l0000081c:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00000828:   80489ed  mov ecx, 0x10
+                  10
+l00000830:   80489ea  and eax, ecx
+l00000834:   804f1fc  mov ebx, 0x10
+                  10
+l0000083c:   8048433  cmp eax, ebx ; jnz l000008b8
+                  68
+             80489ed
+             80489e7
+             80489d9
+
+# type 1
+# @58 = location reg p1
+# edi = b1
+l00000850:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l0000085c:   80489ed  mov ecx, 0xf
+                   f
+l00000864:   80489ea  and eax, ecx
+l00000868:   806efea  mov edx, 0xc0de7044
+            c0de7044
+l00000870:   8048a0a  mov dword [edx], eax
+l00000874:   8048480  mov edi, 0x4
+                   4
+l0000087c:   8048a10  mul edi
+l00000880:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000888:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000890:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l00000898:   8048a0a  mov dword [edx], eax
+l0000089c:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l000008a8:   8048a03  mov edi, eax
+l000008ac:   8048433  jmp l0000091c
+                  64
+             80489e7
+
+# type 2
+# @58 = location reg p1
+# edi = val of reg2
+l000008b8:   80b8196  mov eax, [0xc0de7044]     # jmp from l0000083c
+            c0de7040
+             809ca00
+l000008c4:   8048480  mov edi, 0x4
+                   4
+l000008cc:   8048a10  mul edi
+l000008d0:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000008d8:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000008e0:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l000008e8:   8048a0a  mov dword [edx], eax
+l000008ec:   80b8196  mov eax, [0xc0de7048]
+            c0de7044
+             809ca00
+l000008f8:   8048480  mov edi, 0x4
+                   4
+l00000900:   8048a10  mul edi
+l00000904:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l0000090c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000914:   8048a00  mov eax, dword [eax]
+l00000918:   8048a03  mov edi, eax
+
+# common
+l0000091c:   80b8196  mov eax, [0xc0de7058]     # jmp from l000008ac
+            c0de7054
+             809ca00
+l00000928:   8048a00  mov eax, dword [eax]
+l0000092c:   8048a19  mov ebx, edi
+l00000930:   8048433  cmp eax, ebx ; jnz l00000964
+                  20
+             80489ed
+             80489e7
+             80489d9
+l00000944:   80b8196  mov eax, 0x1
+                   1
+l0000094c:   806efea  mov edx, 0xc0de7064
+            c0de7064
+l00000954:   8048a0a  mov dword [edx], eax
+l00000958:   8048433  jmp l00000978
+                  14
+             80489e7
+l00000964:   80b8196  mov eax, 0x0     # jmp from l00000930
+                   0
+l0000096c:   806efea  mov edx, 0xc0de7064
+            c0de7064
+l00000974:   8048a0a  mov dword [edx], eax
+l00000978:   8048433  nop     # jmp from l00000958
+                   0
+             80489e7
+
+# opcode c0
+l00000984:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000808
+            c0de703c
+             809ca00
+l00000990:   804f1fc  mov ebx, 0xc0
+                  c0
+l00000998:   8048433  cmp eax, ebx ; jnz l00000a18
+                  6c
+             80489ed
+             80489e7
+             80489d9
+l000009ac:   80b8196  mov eax, [0xc0de7064]
+            c0de7060
+             809ca00
+l000009b8:   804f1fc  mov ebx, 0x1
+                   1
+l000009c0:   8048433  cmp eax, ebx ; jnz l00000a0c
+                  38
+             80489ed
+             80489e7
+             80489d9
+l000009d4:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l000009e0:   806efea  mov edx, 0xc0de7038
+            c0de7038
+l000009e8:   8048a0a  mov dword [edx], eax
+l000009ec:   80b8196  mov eax, 0x1
+                   1
+l000009f4:   806efea  mov edx, 0xc0de7054
+            c0de7054
+l000009fc:   8048a0a  mov dword [edx], eax
+l00000a00:   8048433  nop
+                   0
+             80489e7
+l00000a0c:   8048433  nop     # jmp from l000009c0
+                   0
+             80489e7
+
+
+# opcode c1
+l00000a18:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000998
+            c0de703c
+             809ca00
+l00000a24:   804f1fc  mov ebx, 0xc1
+                  c1
+l00000a2c:   8048433  cmp eax, ebx ; jnz l00000aac
+                  6c
+             80489ed
+             80489e7
+             80489d9
+l00000a40:   80b8196  mov eax, [0xc0de7064]
+            c0de7060
+             809ca00
+l00000a4c:   804f1fc  mov ebx, 0x0
+                   0
+l00000a54:   8048433  cmp eax, ebx ; jnz l00000aa0
+                  38
+             80489ed
+             80489e7
+             80489d9
+l00000a68:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00000a74:   806efea  mov edx, 0xc0de7038
+            c0de7038
+l00000a7c:   8048a0a  mov dword [edx], eax
+l00000a80:   80b8196  mov eax, 0x1
+                   1
+l00000a88:   806efea  mov edx, 0xc0de7054
+            c0de7054
+l00000a90:   8048a0a  mov dword [edx], eax
+l00000a94:   8048433  nop
+                   0
+             80489e7
+l00000aa0:   8048433  nop     # jmp from l00000a54
+                   0
+             80489e7
+
+
+# opcode c2
+l00000aac:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000a2c
+            c0de703c
+             809ca00
+l00000ab8:   804f1fc  mov ebx, 0xc2
+                  c2
+l00000ac0:   8048433  cmp eax, ebx ; jnz l00000b0c
+                  38
+             80489ed
+             80489e7
+             80489d9
+l00000ad4:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00000ae0:   806efea  mov edx, 0xc0de7038
+            c0de7038
+l00000ae8:   8048a0a  mov dword [edx], eax
+l00000aec:   80b8196  mov eax, 0x1
+                   1
+l00000af4:   806efea  mov edx, 0xc0de7054
+            c0de7054
+l00000afc:   8048a0a  mov dword [edx], eax
+l00000b00:   8048433  nop
+                   0
+             80489e7
+
+# opcode c3
+l00000b0c:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000ac0
+            c0de703c
+             809ca00
+l00000b18:   804f1fc  mov ebx, 0xc3
+                  c3
+l00000b20:   8048433  cmp eax, ebx ; jnz l00000b94
+                  60
+             80489ed
+             80489e7
+             80489d9
+
+# eax = ip + 4
+l00000b34:   80b8196  mov eax, [0xc0de7038]
+            c0de7034
+             809ca00
+l00000b40:   8048480  mov edi, 0x4
+                   4
+l00000b48:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000b50:   806efea  mov edx, 0xc0de7034
+            c0de7034
+l00000b58:   8048a0a  mov dword [edx], eax
+l00000b5c:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00000b68:   806efea  mov edx, 0xc0de7038
+            c0de7038
+l00000b70:   8048a0a  mov dword [edx], eax
+l00000b74:   80b8196  mov eax, 0x1
+                   1
+l00000b7c:   806efea  mov edx, 0xc0de7054
+            c0de7054
+l00000b84:   8048a0a  mov dword [edx], eax
+l00000b88:   8048433  nop
+                   0
+             80489e7
+
+# opcode d0
+l00000b94:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000b20
+            c0de703c
+             809ca00
+l00000ba0:   804f1fc  mov ebx, 0xd0
+                  d0
+l00000ba8:   8048433  cmp eax, ebx ; jnz l00000bf4
+                  38
+             80489ed
+             80489e7
+             80489d9
+l00000bbc:   80b8196  mov eax, [0xc0de7034]
+            c0de7030
+             809ca00
+l00000bc8:   806efea  mov edx, 0xc0de7038
+            c0de7038
+l00000bd0:   8048a0a  mov dword [edx], eax
+l00000bd4:   80b8196  mov eax, 0x1
+                   1
+l00000bdc:   806efea  mov edx, 0xc0de7054
+            c0de7054
+l00000be4:   8048a0a  mov dword [edx], eax
+l00000be8:   8048433  nop
+                   0
+             80489e7
+
+# opcode d1
+l00000bf4:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000ba8
+            c0de703c
+             809ca00
+l00000c00:   804f1fc  mov ebx, 0xd1
+                  d1
+l00000c08:   8048433  cmp eax, ebx ; jnz l00000cc4
+                  a8
+             80489ed
+             80489e7
+             80489d9
+l00000c1c:   804889e  mov eax, l00000c9c
+             8048480
+                  7c
+             80680c7
+            44444444
+l00000c30:   8048907  mov edx, eax
+l00000c34:   80b8196  mov eax, [0xc0de7000]
+            c0de6ffc
+             809ca00
+l00000c40:   8048a0a  mov dword [edx], eax
+l00000c44:   804889e  mov eax, l00000c98
+             8048480
+                  50
+             80680c7
+            44444444
+l00000c58:   8048907  mov edx, eax
+l00000c5c:   80b8196  mov eax, [0xc0de7004]
+            c0de7000
+             809ca00
+l00000c68:   8048a0a  mov dword [edx], eax
+l00000c6c:   804889e  mov eax, l00000ca4
+             8048480
+                  34
+             80680c7
+            44444444
+l00000c80:   8048907  mov edx, eax
+l00000c84:   80b8196  mov eax, [0xc0de7008]
+            c0de7004
+             809ca00
+l00000c90:   8048a0a  mov dword [edx], eax
+l00000c94:   806f011  mov ecx, 0x0 ; mov ebx, 0x0
+                   0     # ref from l00000c44
+                   0     # ref from l00000c1c
+l00000ca0:   806efea  mov edx, 0x0
+                   0     # ref from l00000c6c
+l00000ca8:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00000cb4:   806f5f0  int 0x80
+l00000cb8:   8048433  nop
+                   0
+             80489e7
+
+# opcode e0
+l00000cc4:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000c08
+            c0de703c
+             809ca00
+l00000cd0:   804f1fc  mov ebx, 0xe0
+                  e0
+l00000cd8:   8048433  cmp eax, ebx ; jnz l00000df4
+                 108
+             80489ed
+             80489e7
+             80489d9
+# @58 = register 1 location
+l00000cec:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00000cf8:   8048480  mov edi, 0x4
+                   4
+l00000d00:   8048a10  mul edi
+l00000d04:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000d0c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+
+l00000d14:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l00000d1c:   8048a0a  mov dword [edx], eax
+
+# @6c = register 2 value
+l00000d20:   80b8196  mov eax, [0xc0de7048]
+            c0de7044
+             809ca00
+l00000d2c:   8048480  mov edi, 0x4
+                   4
+l00000d34:   8048a10  mul edi
+l00000d38:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000d40:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000d48:   8048a00  mov eax, dword [eax]
+l00000d4c:   806efea  mov edx, 0xc0de706c
+            c0de706c
+l00000d54:   8048a0a  mov dword [edx], eax
+
+# edi = register 3 value
+l00000d58:   80b8196  mov eax, [0xc0de704c]
+            c0de7048
+             809ca00
+l00000d64:   8048480  mov edi, 0x4
+                   4
+l00000d6c:   8048a10  mul edi
+l00000d70:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000d78:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000d80:   8048a00  mov eax, dword [eax]
+l00000d84:   8048a03  mov edi, eax
+l00000d88:   80b8196  mov eax, [0xc0de706c]
+            c0de7068
+             809ca00
+
+# eax = regs[p2] + regs[p3]
+l00000d94:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l00000d9c:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l00000da4:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000dac:   8048a00  mov eax, dword [eax]
+
+# regs[p1] = [regs[p2] + regs[p3]]
+l00000db0:   806efea  mov edx, 0xc0de705c
+            c0de705c
+l00000db8:   8048a0a  mov dword [edx], eax
+l00000dbc:   80b8196  mov eax, [0xc0de7058]
+            c0de7054
+             809ca00
+l00000dc8:   8048907  mov edx, eax
+l00000dcc:   80b8196  mov eax, [0xc0de705c]
+            c0de7058
+             809ca00
+l00000dd8:   80489ed  mov ecx, 0xffffffff
+            ffffffff
+l00000de0:   80489ea  and eax, ecx
+l00000de4:   8048a0a  mov dword [edx], eax
+l00000de8:   8048433  nop
+                   0
+             80489e7
+
+# opcode e4
+l00000df4:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000cd8
+            c0de703c
+             809ca00
+l00000e00:   804f1fc  mov ebx, 0xe4
+                  e4
+l00000e08:   8048433  cmp eax, ebx ; jnz l00000f24
+                 108
+             80489ed
+             80489e7
+             80489d9
+l00000e1c:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00000e28:   8048480  mov edi, 0x4
+                   4
+l00000e30:   8048a10  mul edi
+l00000e34:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000e3c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000e44:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l00000e4c:   8048a0a  mov dword [edx], eax
+l00000e50:   80b8196  mov eax, [0xc0de7048]
+            c0de7044
+             809ca00
+l00000e5c:   8048480  mov edi, 0x4
+                   4
+l00000e64:   8048a10  mul edi
+l00000e68:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000e70:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000e78:   8048a00  mov eax, dword [eax]
+l00000e7c:   806efea  mov edx, 0xc0de706c
+            c0de706c
+l00000e84:   8048a0a  mov dword [edx], eax
+l00000e88:   80b8196  mov eax, [0xc0de704c]
+            c0de7048
+             809ca00
+l00000e94:   8048480  mov edi, 0x4
+                   4
+l00000e9c:   8048a10  mul edi
+l00000ea0:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000ea8:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000eb0:   8048a00  mov eax, dword [eax]
+l00000eb4:   8048a03  mov edi, eax
+l00000eb8:   80b8196  mov eax, [0xc0de706c]
+            c0de7068
+             809ca00
+l00000ec4:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l00000ecc:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l00000ed4:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000edc:   8048a00  mov eax, dword [eax]
+l00000ee0:   806efea  mov edx, 0xc0de705c
+            c0de705c
+l00000ee8:   8048a0a  mov dword [edx], eax
+l00000eec:   80b8196  mov eax, [0xc0de7058]
+            c0de7054
+             809ca00
+l00000ef8:   8048907  mov edx, eax
+l00000efc:   80b8196  mov eax, [0xc0de705c]
+            c0de7058
+             809ca00
+l00000f08:   80489ed  mov ecx, 0xffff
+                ffff
+l00000f10:   80489ea  and eax, ecx
+l00000f14:   8048a0a  mov dword [edx], eax
+l00000f18:   8048433  nop
+                   0
+             80489e7
+
+# opcode e8
+l00000f24:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000e08
+            c0de703c
+             809ca00
+l00000f30:   804f1fc  mov ebx, 0xe8
+                  e8
+l00000f38:   8048433  cmp eax, ebx ; jnz l00001054
+                 108
+             80489ed
+             80489e7
+             80489d9
+l00000f4c:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00000f58:   8048480  mov edi, 0x4
+                   4
+l00000f60:   8048a10  mul edi
+l00000f64:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000f6c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000f74:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l00000f7c:   8048a0a  mov dword [edx], eax
+l00000f80:   80b8196  mov eax, [0xc0de7048]
+            c0de7044
+             809ca00
+l00000f8c:   8048480  mov edi, 0x4
+                   4
+l00000f94:   8048a10  mul edi
+l00000f98:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000fa0:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000fa8:   8048a00  mov eax, dword [eax]
+l00000fac:   806efea  mov edx, 0xc0de706c
+            c0de706c
+l00000fb4:   8048a0a  mov dword [edx], eax
+l00000fb8:   80b8196  mov eax, [0xc0de704c]
+            c0de7048
+             809ca00
+l00000fc4:   8048480  mov edi, 0x4
+                   4
+l00000fcc:   8048a10  mul edi
+l00000fd0:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00000fd8:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00000fe0:   8048a00  mov eax, dword [eax]
+l00000fe4:   8048a03  mov edi, eax
+l00000fe8:   80b8196  mov eax, [0xc0de706c]
+            c0de7068
+             809ca00
+l00000ff4:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l00000ffc:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l00001004:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l0000100c:   8048a00  mov eax, dword [eax]
+l00001010:   806efea  mov edx, 0xc0de705c
+            c0de705c
+l00001018:   8048a0a  mov dword [edx], eax
+l0000101c:   80b8196  mov eax, [0xc0de7058]
+            c0de7054
+             809ca00
+l00001028:   8048907  mov edx, eax
+l0000102c:   80b8196  mov eax, [0xc0de705c]
+            c0de7058
+             809ca00
+l00001038:   80489ed  mov ecx, 0xff
+                  ff
+l00001040:   80489ea  and eax, ecx
+l00001044:   8048a0a  mov dword [edx], eax
+l00001048:   8048433  nop
+                   0
+             80489e7
+
+# opcode e1
+l00001054:   80b8196  mov eax, [0xc0de7040]     # jmp from l00000f38
+            c0de703c
+             809ca00
+l00001060:   804f1fc  mov ebx, 0xe1
+                  e1
+l00001068:   8048433  cmp eax, ebx ; jnz l0000117c
+                 100
+             80489ed
+             80489e7
+             80489d9
+
+# @58 = register location for hi nibble of p1
+l0000107c:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00001088:   80489ed  mov ecx, 0x4
+                   4
+l00001090:   8048a1f  shr eax, cl
+l00001094:   8048480  mov edi, 0x4
+                   4
+l0000109c:   8048a10  mul edi
+l000010a0:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000010a8:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000010b0:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l000010b8:   8048a0a  mov dword [edx], eax
+
+# @6c = register value for lo nibble of p1
+l000010bc:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l000010c8:   80489ed  mov ecx, 0xf
+                   f
+l000010d0:   80489ea  and eax, ecx
+l000010d4:   8048480  mov edi, 0x4
+                   4
+l000010dc:   8048a10  mul edi
+l000010e0:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000010e8:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000010f0:   8048a00  mov eax, dword [eax]
+l000010f4:   806efea  mov edx, 0xc0de706c
+            c0de706c
+l000010fc:   8048a0a  mov dword [edx], eax
+
+
+l00001100:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l0000110c:   8048a03  mov edi, eax
+l00001110:   80b8196  mov eax, [0xc0de706c]
+            c0de7068
+             809ca00
+l0000111c:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l00001124:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l0000112c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001134:   8048a00  mov eax, dword [eax]
+l00001138:   806efea  mov edx, 0xc0de705c
+            c0de705c
+l00001140:   8048a0a  mov dword [edx], eax
+l00001144:   80b8196  mov eax, [0xc0de7058]
+            c0de7054
+             809ca00
+l00001150:   8048907  mov edx, eax
+l00001154:   80b8196  mov eax, [0xc0de705c]
+            c0de7058
+             809ca00
+l00001160:   80489ed  mov ecx, 0xffffffff
+            ffffffff
+l00001168:   80489ea  and eax, ecx
+l0000116c:   8048a0a  mov dword [edx], eax
+l00001170:   8048433  nop
+                   0
+             80489e7
+
+# opcode e5
+l0000117c:   80b8196  mov eax, [0xc0de7040]     # jmp from l00001068
+            c0de703c
+             809ca00
+l00001188:   804f1fc  mov ebx, 0xe5
+                  e5
+l00001190:   8048433  cmp eax, ebx ; jnz l000012a4
+                 100
+             80489ed
+             80489e7
+             80489d9
+l000011a4:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l000011b0:   80489ed  mov ecx, 0x4
+                   4
+l000011b8:   8048a1f  shr eax, cl
+l000011bc:   8048480  mov edi, 0x4
+                   4
+l000011c4:   8048a10  mul edi
+l000011c8:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000011d0:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000011d8:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l000011e0:   8048a0a  mov dword [edx], eax
+l000011e4:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l000011f0:   80489ed  mov ecx, 0xf
+                   f
+l000011f8:   80489ea  and eax, ecx
+l000011fc:   8048480  mov edi, 0x4
+                   4
+l00001204:   8048a10  mul edi
+l00001208:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00001210:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001218:   8048a00  mov eax, dword [eax]
+l0000121c:   806efea  mov edx, 0xc0de706c
+            c0de706c
+l00001224:   8048a0a  mov dword [edx], eax
+l00001228:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00001234:   8048a03  mov edi, eax
+l00001238:   80b8196  mov eax, [0xc0de706c]
+            c0de7068
+             809ca00
+l00001244:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l0000124c:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l00001254:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l0000125c:   8048a00  mov eax, dword [eax]
+l00001260:   806efea  mov edx, 0xc0de705c
+            c0de705c
+l00001268:   8048a0a  mov dword [edx], eax
+l0000126c:   80b8196  mov eax, [0xc0de7058]
+            c0de7054
+             809ca00
+l00001278:   8048907  mov edx, eax
+l0000127c:   80b8196  mov eax, [0xc0de705c]
+            c0de7058
+             809ca00
+l00001288:   80489ed  mov ecx, 0xffff
+                ffff
+l00001290:   80489ea  and eax, ecx
+l00001294:   8048a0a  mov dword [edx], eax
+l00001298:   8048433  nop
+                   0
+             80489e7
+
+# opcode e9
+l000012a4:   80b8196  mov eax, [0xc0de7040]     # jmp from l00001190
+            c0de703c
+             809ca00
+l000012b0:   804f1fc  mov ebx, 0xe9
+                  e9
+l000012b8:   8048433  cmp eax, ebx ; jnz l000013cc
+                 100
+             80489ed
+             80489e7
+             80489d9
+l000012cc:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l000012d8:   80489ed  mov ecx, 0x4
+                   4
+l000012e0:   8048a1f  shr eax, cl
+l000012e4:   8048480  mov edi, 0x4
+                   4
+l000012ec:   8048a10  mul edi
+l000012f0:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000012f8:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001300:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l00001308:   8048a0a  mov dword [edx], eax
+l0000130c:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00001318:   80489ed  mov ecx, 0xf
+                   f
+l00001320:   80489ea  and eax, ecx
+l00001324:   8048480  mov edi, 0x4
+                   4
+l0000132c:   8048a10  mul edi
+l00001330:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00001338:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001340:   8048a00  mov eax, dword [eax]
+l00001344:   806efea  mov edx, 0xc0de706c
+            c0de706c
+l0000134c:   8048a0a  mov dword [edx], eax
+l00001350:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l0000135c:   8048a03  mov edi, eax
+l00001360:   80b8196  mov eax, [0xc0de706c]
+            c0de7068
+             809ca00
+l0000136c:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l00001374:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l0000137c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001384:   8048a00  mov eax, dword [eax]
+l00001388:   806efea  mov edx, 0xc0de705c
+            c0de705c
+l00001390:   8048a0a  mov dword [edx], eax
+l00001394:   80b8196  mov eax, [0xc0de7058]
+            c0de7054
+             809ca00
+l000013a0:   8048907  mov edx, eax
+l000013a4:   80b8196  mov eax, [0xc0de705c]
+            c0de7058
+             809ca00
+l000013b0:   80489ed  mov ecx, 0xff
+                  ff
+l000013b8:   80489ea  and eax, ecx
+l000013bc:   8048a0a  mov dword [edx], eax
+l000013c0:   8048433  nop
+                   0
+             80489e7
+
+# opcode e2
+l000013cc:   80b8196  mov eax, [0xc0de7040]     # jmp from l000012b8
+            c0de703c
+             809ca00
+l000013d8:   804f1fc  mov ebx, 0xe2
+                  e2
+l000013e0:   8048433  cmp eax, ebx ; jnz l00001508
+                 114
+             80489ed
+             80489e7
+             80489d9
+
+# @6c = value of reg a2
+l000013f4:   80b8196  mov eax, [0xc0de7048]
+            c0de7044
+             809ca00
+l00001400:   8048480  mov edi, 0x4
+                   4
+l00001408:   8048a10  mul edi
+l0000140c:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00001414:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l0000141c:   8048a00  mov eax, dword [eax]
+l00001420:   806efea  mov edx, 0xc0de706c
+            c0de706c
+l00001428:   8048a0a  mov dword [edx], eax
+
+# @70 = value of reg a3
+l0000142c:   80b8196  mov eax, [0xc0de704c]
+            c0de7048
+             809ca00
+l00001438:   8048480  mov edi, 0x4
+                   4
+l00001440:   8048a10  mul edi
+l00001444:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l0000144c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001454:   8048a00  mov eax, dword [eax]
+l00001458:   806efea  mov edx, 0xc0de7070
+            c0de7070
+l00001460:   8048a0a  mov dword [edx], eax
+l00001464:   80b8196  mov eax, [0xc0de706c]
+            c0de7068
+             809ca00
+l00001470:   8048a03  mov edi, eax
+l00001474:   80b8196  mov eax, [0xc0de7070]
+            c0de706c
+             809ca00
+
+# value of reg a2 + reg a3
+l00001480:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l00001488:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l00001490:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001498:   806efea  mov edx, 0xc0de7074
+            c0de7074
+
+# @74 = real address reg a2 + reg a3
+l000014a0:   8048a0a  mov dword [edx], eax
+
+# @6c = value of reg a1
+l000014a4:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l000014b0:   8048480  mov edi, 0x4
+                   4
+l000014b8:   8048a10  mul edi
+l000014bc:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000014c4:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000014cc:   8048a00  mov eax, dword [eax]
+l000014d0:   806efea  mov edx, 0xc0de706c
+            c0de706c
+l000014d8:   8048a0a  mov dword [edx], eax
+l000014dc:   80b8196  mov eax, [0xc0de7074]
+            c0de7070
+             809ca00
+l000014e8:   8048907  mov edx, eax
+l000014ec:   80b8196  mov eax, [0xc0de706c]
+            c0de7068
+             809ca00
+l000014f8:   8048a0a  mov dword [edx], eax
+l000014fc:   8048433  nop
+                   0
+             80489e7
+
+# opcode e6
+l00001508:   80b8196  mov eax, [0xc0de7040]     # jmp from l000013e0
+            c0de703c
+             809ca00
+l00001514:   804f1fc  mov ebx, 0xe6
+                  e6
+l0000151c:   8048433  cmp eax, ebx ; jnz l00001644
+                 114
+             80489ed
+             80489e7
+             80489d9
+l00001530:   80b8196  mov eax, [0xc0de7048]
+            c0de7044
+             809ca00
+l0000153c:   8048480  mov edi, 0x4
+                   4
+l00001544:   8048a10  mul edi
+l00001548:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00001550:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001558:   8048a00  mov eax, dword [eax]
+l0000155c:   806efea  mov edx, 0xc0de706c
+            c0de706c
+l00001564:   8048a0a  mov dword [edx], eax
+l00001568:   80b8196  mov eax, [0xc0de704c]
+            c0de7048
+             809ca00
+l00001574:   8048480  mov edi, 0x4
+                   4
+l0000157c:   8048a10  mul edi
+l00001580:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00001588:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001590:   8048a00  mov eax, dword [eax]
+l00001594:   806efea  mov edx, 0xc0de7070
+            c0de7070
+l0000159c:   8048a0a  mov dword [edx], eax
+l000015a0:   80b8196  mov eax, [0xc0de706c]
+            c0de7068
+             809ca00
+l000015ac:   8048a03  mov edi, eax
+l000015b0:   80b8196  mov eax, [0xc0de7070]
+            c0de706c
+             809ca00
+l000015bc:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l000015c4:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l000015cc:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000015d4:   806efea  mov edx, 0xc0de7074
+            c0de7074
+l000015dc:   8048a0a  mov dword [edx], eax
+l000015e0:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l000015ec:   8048480  mov edi, 0x4
+                   4
+l000015f4:   8048a10  mul edi
+l000015f8:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00001600:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001608:   8048a00  mov eax, dword [eax]
+l0000160c:   806efea  mov edx, 0xc0de706c
+            c0de706c
+l00001614:   8048a0a  mov dword [edx], eax
+l00001618:   80b8196  mov eax, [0xc0de7074]
+            c0de7070
+             809ca00
+l00001624:   8048907  mov edx, eax
+l00001628:   80b8196  mov eax, [0xc0de706c]
+            c0de7068
+             809ca00
+l00001634:   8048a09  mov word [edx], ax
+l00001638:   8048433  nop
+                   0
+             80489e7
+
+# opcode ea
+l00001644:   80b8196  mov eax, [0xc0de7040]     # jmp from l0000151c
+            c0de703c
+             809ca00
+l00001650:   804f1fc  mov ebx, 0xea
+                  ea
+l00001658:   8048433  cmp eax, ebx ; jnz l00001780
+                 114
+             80489ed
+             80489e7
+             80489d9
+l0000166c:   80b8196  mov eax, [0xc0de7048]
+            c0de7044
+             809ca00
+l00001678:   8048480  mov edi, 0x4
+                   4
+l00001680:   8048a10  mul edi
+l00001684:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l0000168c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001694:   8048a00  mov eax, dword [eax]
+l00001698:   806efea  mov edx, 0xc0de706c
+            c0de706c
+l000016a0:   8048a0a  mov dword [edx], eax
+l000016a4:   80b8196  mov eax, [0xc0de704c]
+            c0de7048
+             809ca00
+l000016b0:   8048480  mov edi, 0x4
+                   4
+l000016b8:   8048a10  mul edi
+l000016bc:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000016c4:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000016cc:   8048a00  mov eax, dword [eax]
+l000016d0:   806efea  mov edx, 0xc0de7070
+            c0de7070
+l000016d8:   8048a0a  mov dword [edx], eax
+l000016dc:   80b8196  mov eax, [0xc0de706c]
+            c0de7068
+             809ca00
+l000016e8:   8048a03  mov edi, eax
+l000016ec:   80b8196  mov eax, [0xc0de7070]
+            c0de706c
+             809ca00
+l000016f8:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l00001700:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l00001708:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001710:   806efea  mov edx, 0xc0de7074
+            c0de7074
+l00001718:   8048a0a  mov dword [edx], eax
+l0000171c:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00001728:   8048480  mov edi, 0x4
+                   4
+l00001730:   8048a10  mul edi
+l00001734:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l0000173c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001744:   8048a00  mov eax, dword [eax]
+l00001748:   806efea  mov edx, 0xc0de706c
+            c0de706c
+l00001750:   8048a0a  mov dword [edx], eax
+l00001754:   80b8196  mov eax, [0xc0de7074]
+            c0de7070
+             809ca00
+l00001760:   8048907  mov edx, eax
+l00001764:   80b8196  mov eax, [0xc0de706c]
+            c0de7068
+             809ca00
+l00001770:   8048a0d  mov byte [edx], al
+l00001774:   8048433  nop
+                   0
+             80489e7
+
+# opcode e3
+l00001780:   80b8196  mov eax, [0xc0de7040]     # jmp from l00001658
+            c0de703c
+             809ca00
+l0000178c:   804f1fc  mov ebx, 0xe3
+                  e3
+l00001794:   8048433  cmp eax, ebx ; jnz l00001890
+                  e8
+             80489ed
+             80489e7
+             80489d9
+
+# @68 = value of regs[a1&f]
+l000017a8:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l000017b4:   80489ed  mov ecx, 0xf
+                   f
+l000017bc:   80489ea  and eax, ecx
+l000017c0:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000017c8:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000017d0:   8048a00  mov eax, dword [eax]
+l000017d4:   806efea  mov edx, 0xc0de7068
+            c0de7068
+l000017dc:   8048a0a  mov dword [edx], eax
+
+# @74 = b1 + regs[a1&f] + 0xc0de0000
+l000017e0:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l000017ec:   8048a03  mov edi, eax
+l000017f0:   80b8196  mov eax, [0xc0de7068]
+            c0de7064
+             809ca00
+l000017fc:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l00001804:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l0000180c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001814:   806efea  mov edx, 0xc0de7074
+            c0de7074
+l0000181c:   8048a0a  mov dword [edx], eax
+
+# @68 = value of regs[a1>>4]
+l00001820:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l0000182c:   80489ed  mov ecx, 0x4
+                   4
+l00001834:   8048a1f  shr eax, cl
+l00001838:   8048480  mov edi, 0x4
+                   4
+l00001840:   8048a10  mul edi
+l00001844:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l0000184c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001854:   8048a00  mov eax, dword [eax]
+l00001858:   806efea  mov edx, 0xc0de7068
+            c0de7068
+l00001860:   8048a0a  mov dword [edx], eax
+l00001864:   80b8196  mov eax, [0xc0de7074]
+            c0de7070
+             809ca00
+l00001870:   8048907  mov edx, eax
+l00001874:   80b8196  mov eax, [0xc0de7068]
+            c0de7064
+             809ca00
+l00001880:   8048a0a  mov dword [edx], eax
+l00001884:   8048433  nop
+                   0
+             80489e7
+
+# opcode e7
+l00001890:   80b8196  mov eax, [0xc0de7040]     # jmp from l00001794
+            c0de703c
+             809ca00
+l0000189c:   804f1fc  mov ebx, 0xe7
+                  e7
+l000018a4:   8048433  cmp eax, ebx ; jnz l000019a0
+                  e8
+             80489ed
+             80489e7
+             80489d9
+l000018b8:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l000018c4:   80489ed  mov ecx, 0xf
+                   f
+l000018cc:   80489ea  and eax, ecx
+l000018d0:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000018d8:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000018e0:   8048a00  mov eax, dword [eax]
+l000018e4:   806efea  mov edx, 0xc0de7068
+            c0de7068
+l000018ec:   8048a0a  mov dword [edx], eax
+l000018f0:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l000018fc:   8048a03  mov edi, eax
+l00001900:   80b8196  mov eax, [0xc0de7068]
+            c0de7064
+             809ca00
+l0000190c:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l00001914:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l0000191c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001924:   806efea  mov edx, 0xc0de7074
+            c0de7074
+l0000192c:   8048a0a  mov dword [edx], eax
+l00001930:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l0000193c:   80489ed  mov ecx, 0x4
+                   4
+l00001944:   8048a1f  shr eax, cl
+l00001948:   8048480  mov edi, 0x4
+                   4
+l00001950:   8048a10  mul edi
+l00001954:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l0000195c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001964:   8048a00  mov eax, dword [eax]
+l00001968:   806efea  mov edx, 0xc0de7068
+            c0de7068
+l00001970:   8048a0a  mov dword [edx], eax
+l00001974:   80b8196  mov eax, [0xc0de7074]
+            c0de7070
+             809ca00
+l00001980:   8048907  mov edx, eax
+l00001984:   80b8196  mov eax, [0xc0de7068]
+            c0de7064
+             809ca00
+l00001990:   8048a09  mov word [edx], ax
+l00001994:   8048433  nop
+                   0
+             80489e7
+
+# opcode eb
+l000019a0:   80b8196  mov eax, [0xc0de7040]     # jmp from l000018a4
+            c0de703c
+             809ca00
+l000019ac:   804f1fc  mov ebx, 0xeb
+                  eb
+l000019b4:   8048433  cmp eax, ebx ; jnz l00001ab0
+                  e8
+             80489ed
+             80489e7
+             80489d9
+l000019c8:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l000019d4:   80489ed  mov ecx, 0xf
+                   f
+l000019dc:   80489ea  and eax, ecx
+l000019e0:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l000019e8:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l000019f0:   8048a00  mov eax, dword [eax]
+l000019f4:   806efea  mov edx, 0xc0de7068
+            c0de7068
+l000019fc:   8048a0a  mov dword [edx], eax
+l00001a00:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00001a0c:   8048a03  mov edi, eax
+l00001a10:   80b8196  mov eax, [0xc0de7068]
+            c0de7064
+             809ca00
+l00001a1c:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l00001a24:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l00001a2c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001a34:   806efea  mov edx, 0xc0de7074
+            c0de7074
+l00001a3c:   8048a0a  mov dword [edx], eax
+l00001a40:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00001a4c:   80489ed  mov ecx, 0x4
+                   4
+l00001a54:   8048a1f  shr eax, cl
+l00001a58:   8048480  mov edi, 0x4
+                   4
+l00001a60:   8048a10  mul edi
+l00001a64:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00001a6c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001a74:   8048a00  mov eax, dword [eax]
+l00001a78:   806efea  mov edx, 0xc0de7068
+            c0de7068
+l00001a80:   8048a0a  mov dword [edx], eax
+l00001a84:   80b8196  mov eax, [0xc0de7074]
+            c0de7070
+             809ca00
+l00001a90:   8048907  mov edx, eax
+l00001a94:   80b8196  mov eax, [0xc0de7068]
+            c0de7064
+             809ca00
+l00001aa0:   8048a0d  mov byte [edx], al
+l00001aa4:   8048433  nop
+                   0
+             80489e7
+
+# opcode f0
+l00001ab0:   80b8196  mov eax, [0xc0de7040]     # jmp from l000019b4
+            c0de703c
+             809ca00
+l00001abc:   804f1fc  mov ebx, 0xf0
+                  f0
+l00001ac4:   8048433  cmp eax, ebx ; jnz l00001b88
+                  b0
+             80489ed
+             80489e7
+             80489d9
+
+# [l0000ab48] = b1
+l00001ad8:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00001ae4:   804889e  mov eax, l00001b48
+             8048480
+                  60
+             80680c7
+            44444444
+l00001af8:   8048907  mov edx, eax
+l00001afc:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00001b08:   8048a0a  mov dword [edx], eax
+
+
+# eax = 0xc0de7000 + a1 * 4
+l00001b0c:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00001b18:   8048480  mov edi, 0x4
+                   4
+l00001b20:   8048a10  mul edi
+l00001b24:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00001b2c:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+
+# save register address to 0x74: @74 = 0xc0de7000 + a1 * 4
+l00001b34:   806efea  mov edx, 0xc0de7074
+            c0de7074
+l00001b3c:   8048a0a  mov dword [edx], eax
+
+# eax = [0xc0de7000 + a1 * 4]
+l00001b40:   8048a00  mov eax, dword [eax]
+
+# @68 = [0xc0de7000 + a1 * 4] << b1
+l00001b44:   80489ed  mov ecx, 0x0
+                   0     # ref from l00001ae4, will get filled with b1
+l00001b4c:   8048a1c  shl eax, cl
+l00001b50:   806efea  mov edx, 0xc0de7068
+            c0de7068
+l00001b58:   8048a0a  mov dword [edx], eax
+
+# [@74] = [0xc0de7000 + a1 * 4] << b1
+l00001b5c:   80b8196  mov eax, [0xc0de7074]
+            c0de7070
+             809ca00
+l00001b68:   8048907  mov edx, eax
+l00001b6c:   80b8196  mov eax, [0xc0de7068]
+            c0de7064
+             809ca00
+l00001b78:   8048a0a  mov dword [edx], eax
+l00001b7c:   8048433  nop
+                   0
+             80489e7
+
+# opcode f1
+l00001b88:   80b8196  mov eax, [0xc0de7040]     # jmp from l00001ac4
+            c0de703c
+             809ca00
+l00001b94:   804f1fc  mov ebx, 0xf1
+                  f1
+l00001b9c:   8048433  cmp eax, ebx ; jnz l00001c60
+                  b0
+             80489ed
+             80489e7
+             80489d9
+l00001bb0:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00001bbc:   804889e  mov eax, l00001c20
+             8048480
+                  60
+             80680c7
+            44444444
+l00001bd0:   8048907  mov edx, eax
+l00001bd4:   80b8196  mov eax, [0xc0de7050]
+            c0de704c
+             809ca00
+l00001be0:   8048a0a  mov dword [edx], eax
+l00001be4:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00001bf0:   8048480  mov edi, 0x4
+                   4
+l00001bf8:   8048a10  mul edi
+l00001bfc:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00001c04:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001c0c:   806efea  mov edx, 0xc0de7074
+            c0de7074
+l00001c14:   8048a0a  mov dword [edx], eax
+l00001c18:   8048a00  mov eax, dword [eax]
+l00001c1c:   80489ed  mov ecx, 0x0
+                   0     # ref from l00001bbc
+l00001c24:   8048a1f  shr eax, cl
+l00001c28:   806efea  mov edx, 0xc0de7068
+            c0de7068
+l00001c30:   8048a0a  mov dword [edx], eax
+l00001c34:   80b8196  mov eax, [0xc0de7074]
+            c0de7070
+             809ca00
+l00001c40:   8048907  mov edx, eax
+l00001c44:   80b8196  mov eax, [0xc0de7068]
+            c0de7064
+             809ca00
+l00001c50:   8048a0a  mov dword [edx], eax
+l00001c54:   8048433  nop
+                   0
+             80489e7
+
+# opcode f2
+l00001c60:   80b8196  mov eax, [0xc0de7040]     # jmp from l00001b9c
+            c0de703c
+             809ca00
+l00001c6c:   804f1fc  mov ebx, 0xf2
+                  f2
+l00001c74:   8048433  cmp eax, ebx ; jnz l00001d34
+                  ac
+             80489ed
+             80489e7
+             80489d9
+
+# [0x30]-=4
+l00001c88:   80b8196  mov eax, 0xc0de7030
+            c0de7030
+l00001c90:   8048907  mov edx, eax
+l00001c94:   80b8196  mov eax, 0x4
+                   4
+l00001c9c:   8048a03  mov edi, eax
+l00001ca0:   80b8196  mov eax, 0xc0de7030
+            c0de7030
+l00001ca8:   8048a00  mov eax, dword [eax]
+l00001cac:   8048a13  sub eax, edi
+
+l00001cb0:   8048a0a  mov dword [edx], eax
+
+# compute current stack pointer real address and store it in @0x58
+l00001cb4:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l00001cbc:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001cc4:   806efea  mov edx, 0xc0de7058
+            c0de7058
+l00001ccc:   8048a0a  mov dword [edx], eax
+
+
+# compute stack values
+l00001cd0:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00001cdc:   8048480  mov edi, 0x4
+                   4
+l00001ce4:   8048a10  mul edi
+l00001ce8:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00001cf0:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001cf8:   8048a00  mov eax, dword [eax]
+l00001cfc:   806efea  mov edx, 0xc0de7068
+            c0de7068
+l00001d04:   8048a0a  mov dword [edx], eax
+
+
+# store reg value on stack
+l00001d08:   80b8196  mov eax, [0xc0de7058]
+            c0de7054
+             809ca00
+l00001d14:   8048907  mov edx, eax
+l00001d18:   80b8196  mov eax, [0xc0de7068]
+            c0de7064
+             809ca00
+l00001d24:   8048a0a  mov dword [edx], eax
+l00001d28:   8048433  nop
+                   0
+             80489e7
+
+
+# opcode f3
+l00001d34:   80b8196  mov eax, [0xc0de7040]     # jmp from l00001c74
+            c0de703c
+             809ca00
+l00001d40:   804f1fc  mov ebx, 0xf3
+                  f3
+l00001d48:   8048433  cmp eax, ebx ; jnz l00001e00
+                  a4
+             80489ed
+             80489e7
+             80489d9
+l00001d5c:   80b8196  mov eax, 0xc0de7030
+            c0de7030
+l00001d64:   8048a00  mov eax, dword [eax]
+l00001d68:   8048480  mov edi, 0xc0de0000
+            c0de0000
+l00001d70:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001d78:   8048a00  mov eax, dword [eax]
+l00001d7c:   806efea  mov edx, 0xc0de7068
+            c0de7068
+l00001d84:   8048a0a  mov dword [edx], eax
+l00001d88:   80b8196  mov eax, [0xc0de7044]
+            c0de7040
+             809ca00
+l00001d94:   8048480  mov edi, 0x4
+                   4
+l00001d9c:   8048a10  mul edi
+l00001da0:   8048480  mov edi, 0xc0de7000
+            c0de7000
+l00001da8:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001db0:   8048907  mov edx, eax
+l00001db4:   80b8196  mov eax, [0xc0de7068]
+            c0de7064
+             809ca00
+l00001dc0:   8048a0a  mov dword [edx], eax
+l00001dc4:   80b8196  mov eax, 0xc0de7030
+            c0de7030
+l00001dcc:   8048907  mov edx, eax
+l00001dd0:   80b8196  mov eax, 0x4
+                   4
+l00001dd8:   8048a03  mov edi, eax
+l00001ddc:   80b8196  mov eax, 0xc0de7030
+            c0de7030
+l00001de4:   8048a00  mov eax, dword [eax]
+l00001de8:   80680c7  add eax, edi ; mov edi, 0x77777777
+            77777777
+l00001df0:   8048a0a  mov dword [edx], eax
+l00001df4:   8048433  nop
+                   0
+             80489e7
+
+# opcode ff
+l00001e00:   80b8196  mov eax, [0xc0de7040]     # jmp from l00001d48
+            c0de703c
+             809ca00
+l00001e0c:   804f1fc  mov ebx, 0xff
+                  ff
+l00001e14:   8048433  cmp eax, ebx ; jnz l00001e54
+                  2c
+             80489ed
+             80489e7
+             80489d9
+l00001e28:   806f011  mov ecx, 0x0 ; mov ebx, 0x29a
+                   0
+                 29a
+l00001e34:   806efea  mov edx, 0x0
+                   0
+l00001e3c:   80b8196  mov eax, 0x1
+                   1
+l00001e44:   806f5f0  int 0x80
+l00001e48:   8048433  nop
+                   0
+             80489e7
+
+# if !jmpflag: ip += 4
+l00001e54:   80b8196  mov eax, [0xc0de7054]     # jmp from l00001e14
+            c0de7050
+             809ca00
+l00001e60:   804f1fc  mov ebx, 0x0
+                   0
+l00001e68:   8048433  cmp eax, ebx ; jnz l00001eb0
+                  34
+             80489ed
+             80489e7
+             80489d9
+l00001e7c:   80b8196  mov eax, [0xc0de7038]
+            c0de7034
+             809ca00
+l00001e88:   8048480  mov edi, 0x4
+                   4
+l00001e90:   80680c7  add eax, edi ; mov edi, 0x66666666
+            66666666
+l00001e98:   806efea  mov edx, 0xc0de7038
+            c0de7038
+l00001ea0:   8048a0a  mov dword [edx], eax
+l00001ea4:   8048433  nop
+                   0
+             80489e7
+
+# redo loop
+l00001eb0:   804889e  jmp l00000090     # jmp from l00001e68
+             8048433
+                1e24
+             808e828
+            11223344
+            55667788
+             8048d86
+l00001ecc:   806f011  mov ecx, 0x0 ; mov ebx, 0x0
+                   0
+                   0
+l00001ed8:   806efea  mov edx, 0x0
+                   0
+l00001ee0:   80b8196  mov eax, 0x1
+                   1
+l00001ee8:   806f5f0  int 0x80
+l00001eec:  c0de0000       # ref from l00000000
+l00001ef0:      8000
+l00001ef4:         7
+l00001ef8:        31
+l00001efc:         0
+l00001f00:         0
+l00001f04:  a31bc0de       # ref from l00000050
+l00001f08:  f00b0010
+l00001f0c:  a31003c6
+l00001f10:  c300016c
+l00001f14:  a31001e4
+l00001f18:  c3000124
+l00001f1c:  a31001bc
+l00001f20:  c300016c
+l00001f24:  a31005bf
+l00001f28:  a0000b00
+l00001f2c:  a3110010
+l00001f30:  c3000110
+l00001f34:  a31605bf
+l00001f38:  a3110000
+l00001f3c:  e9060000
+l00001f40:  a0010000
+l00001f44:  a011009b
+l00001f48:  e9060001
+l00001f4c:  a0010000
+l00001f50:  a01100ce
+l00001f54:  e9060002
+l00001f58:  a0010000
+l00001f5c:  a0110092
+l00001f60:  e9060003
+l00001f64:  a0010000
+l00001f68:  a01100ce
+l00001f6c:  e9060004
+l00001f70:  a0010000
+l00001f74:  a011008b
+l00001f78:  e9060005
+l00001f7c:  a0010000
+l00001f80:  a011008d
+l00001f84:  e9060006
+l00001f88:  a0010000
+l00001f8c:  a01100ce
+l00001f90:  e9060007
+l00001f94:  a0010000
+l00001f98:  a0110085
+l00001f9c:  b01107f8
+l00001fa0:  c00000ac
+l00001fa4:  a31003ac
+l00001fa8:  c300016c
+l00001fac:  c2000018
+l00001fb0:  a31003b9
+l00001fb4:  c300016c
+l00001fb8:  a31005df
+l00001fbc:  a3110e34
+l00001fc0:  a1010000
+l00001fc4:  a31305df
+l00001fc8:  a3070100
+l00001fcc:  a31505bf
+l00001fd0:  a3160000
+l00001fd4:  a3140000
+l00001fd8:  a3182000
+l00001fdc:  e8000304
+l00001fe0:  e8010506
+l00001fe4:  a21000aa
+l00001fe8:  a2000100
+l00001fec:  ea000804
+l00001ff0:  a0160001
+l00001ff4:  b0160008
+l00001ff8:  c10000fc
+l00001ffc:  a3160000
+l00002000:  a0140001
+l00002004:  b0040700
+l00002008:  c10000d8
+l0000200c:  c2002000
+l00002010:  ff000000
+l00002014:  a3020100
+l00002018:  a3010000
+l0000201c:  a3100000
+l00002020:  d1000003
+l00002024:  d0000000
+l00002028:  f2040000
+l0000202c:  a3040000
+l00002030:  e9040000
+l00002034:  b0100000
+l00002038:  c0000164
+l0000203c:  a3100001
+l00002040:  a3010400
+l00002044:  a0010b00
+l00002048:  a3120001
+l0000204c:  d1000004
+l00002050:  a31001b4
+l00002054:  a0000b00
+l00002058:  a3110000
+l0000205c:  d10000a2
+l00002060:  a0140001
+l00002064:  c200012c
+l00002068:  f3040000
+l0000206c:  d0000000
+l00002070:  f20d0000
+l00002074:  a3040000
+l00002078:  c3000194
+l0000207c:  a3020000
+l00002080:  a3010400
+l00002084:  a0010b00
+l00002088:  a3100001
+l0000208c:  d1000004
+l00002090:  f30d0000
+l00002094:  d0000000
+l00002098:  a3110000
+l0000209c:  e8020001
+l000020a0:  b0120000
+l000020a4:  c00001ac
+l000020a8:  a0110001
+l000020ac:  c2000198
+l000020b0:  a3000100
+l000020b4:  d0000000
+l000020b8:         0
+l000020bc:    ffffff
+l000020c0:  23232020
+l000020c4:  48572023
+l000020c8:  20532730
+l000020cc:  52553059
+l000020d0:  56344620
+l000020d4:  54695230
+l000020d8:  4c432045
+l000020dc:  3f4e5730
+l000020e0:  3e20200a
+l000020e4:    203e3e
+l000020e8:  20200a0a
+l000020ec:  204f4f54
+l000020f0:  52414853
+l000020f4:  4f462050
+l000020f8:  48542052
+l000020fc:  45522045
+l00002100:  202c5453
+l00002104:  504d4953
+l00002108:  5420594c
+l0000210c:  42204548
+l00002110:  20545345
+l00002114:  4520200a
+l00002118:  4953554c
+l0000211c:  41204556
+l00002120:  4f20444e
+l00002124:  55435342
+l00002128:  4c204552
+l0000212c:  20454b49
+l00002130:  52454854
+l00002134:  20532745
+l00002138:  43204f4e
+l0000213c:  45544e4f
+l00002140:  200a5453
+l00002144:  49485420
+l00002148:  53492053
+l0000214c:  45485420
+l00002150:  4c495720
+l00002154:  49572044
+l00002158:  5720444c
+l0000215c:  2c545345
+l00002160:  4d4f4320
+l00002164:  4e412045
+l00002168:  52422044
+l0000216c:  204b4145
+l00002170:  4f544e49
+l00002174:  49485420
+l00002178:  48432053
+l0000217c:   a545345
+l00002180:  4820200a
+l00002184:  454d4c4f
+l00002188:  49202c53
+l0000218c:  544f4720
+l00002190:  45524720
+l00002194:  44205441
+l00002198:  53205941
+l0000219c:  20544948
+l000021a0:  4d20200a
+l000021a4:  44302059
+l000021a8:  207a5941
+l000021ac:  20544f47
+l000021b0:  20454854
+l000021b4:  4e454353
+l000021b8:  4f472045
+l000021bc:  20274e49
+l000021c0:  20455041
+l000021c4:  54494853
+l000021c8:  5220200a
+l000021cc:  4950504f
+l000021d0:  4920274e
+l000021d4:  2041204e
+l000021d8:  54414f42
+l000021dc:  4b494c20
+l000021e0:  48542045
+l000021e4:  41432045
+l000021e8:  204e2750
+l000021ec:  5420464f
+l000021f0:  53204548
+l000021f4:   a504948
+l000021f8:  4f592020
+l000021fc:  414c2055
+l00002200:  2053454d
+l00002204:  274e4941
+l00002208:  48532054
+l0000220c:  202c5449
+l00002210:  414d2049
+l00002214:  4320454b
+l00002218:  474e4148
+l0000221c:  55512045
+l00002220:   a4b4349
+l00002224:  4d492020
+l00002228:  4e4f4320
+l0000222c:  4e494154
+l00002230:  49204445
+l00002234:  4854204e
+l00002238:  54532045
+l0000223c:  464b4341
+l00002240:  454d4152
+l00002244:  54495720
+l00002248:  48542048
+l0000224c:  4f432045
+l00002250:  49204544
+l00002254:  50495220
+l00002258:  20444550
+l0000225c:  20200a0a
+l00002260:  53204f53
+l00002264:  20504554
+l00002268:  4b434142
+l0000226c:  53554320
+l00002270:  4f4c4320
+l00002274:  20534e57
+l00002278:  20455241
+l0000227c:  454b494c
+l00002280:  41485420
+l00002284:  200a2c54
+l00002288:  20455720
+l0000228c:  4b4c4157
+l00002290:  45564f20
+l00002294:  41482052
+l00002298:  52454b43
+l0000229c:  494c2053
+l000022a0:  4120454b
+l000022a4:  4f4f4420
+l000022a8:  54414d52
+l000022ac:     a0a21
+l000022b0:  24242020
+l000022b4:  4f4e2024
+l000022b8:   a214550
+l000022bc:  24202000
+l000022c0:  59202424
+l000022c4:  21484145
+l000022c8:  200a000a
+l000022cc:  20202020
+l000022d0:  20202020
+l000022d4:  20202020
+l000022d8:   a5f2020
+l000022dc:  20202020
+l000022e0:  20202020
+l000022e4:  20202020
+l000022e8:  5f282020
+l000022ec:  20202029
+l000022f0:  20202020
+l000022f4:  5f202020
+l000022f8:  2020200a
+l000022fc:  20202020
+l00002300:  5f202020
+l00002304:  20202020
+l00002308:  20202020
+l0000230c:  2e3d2e20
+l00002310:  28202020
+l00002314:  200a295f
+l00002318:  20202020
+l0000231c:  20202020
+l00002320:  20295f28
+l00002324:  205f2020
+l00002328:  2f2f2020
+l0000232c:  5f296028
+l00002330:  2020200a
+l00002334:  20202020
+l00002338:  20202020
+l0000233c:  2f202020
+l00002340:  2f5c602f
+l00002344:  205c7c20
+l00002348:  5c5c6030
+l0000234c:  2020200a
+l00002350:  20202020
+l00002354:  20202020
+l00002358:  7c202020
+l0000235c:  5c2e2d7c
+l00002360:  2f5f7c5f
+l00002364:  7c7c2d2e
+l00002368:  2020200a
+l0000236c:  20202020
+l00002370:  20202020
+l00002374:  29202020
+l00002378:  5f7c202f
+l0000237c:  5f5f5f5f
+l00002380:  285c207c
+l00002384:  20202020
+l00002388:  20200a5f
+l0000238c:  20202020
+l00002390:  20202020
+l00002394:  30202020
+l00002398:  23202020
+l0000239c:  2f205c2f
+l000023a0:  2020235c
+l000023a4:  20202030
+l000023a8:   a295f28
+l000023ac:  20202020
+l000023b0:  20202020
+l000023b4:  20202020
+l000023b8:  20202020
+l000023bc:  6f207c5f
+l000023c0:  7c206f20
+l000023c4:  20200a5f
+l000023c8:  20202020
+l000023cc:  5f202020
+l000023d0:  20202020
+l000023d4:  7c282820
+l000023d8:  205e202c
+l000023dc:  29297c2c
+l000023e0:  2020200a
+l000023e4:  20202020
+l000023e8:  295f2820
+l000023ec:  20202020
+l000023f0:  7c7c6020
+l000023f4:  7c2f5f5c
+l000023f8:  200a607c
+l000023fc:  20202020
+l00002400:  20202020
+l00002404:  20202020
+l00002408:  20202020
+l0000240c:  5f207c7c
+l00002410:  207c7c20
+l00002414:  20202020
+l00002418:  200a5f20
+l0000241c:  20202020
+l00002420:  20202020
+l00002424:  20202020
+l00002428:  20202020
+l0000242c:  5f5c207c
+l00002430:  207c202f
+l00002434:  20202020
+l00002438:   a295f28
+l0000243c:  20202020
+l00002440:  20202020
+l00002444:  20202020
+l00002448:  5f2e3020
+l0000244c:  205c2e5f
+l00002450:  2e2f2020
+l00002454:  302e5f5f
+l00002458:  2020200a
+l0000245c:  20202020
+l00002460:  20202020
+l00002464:  60202020
+l00002468:  20205f2e
+l0000246c:  20602260
+l00002470:  272e5f20
+l00002474:  2020200a
+l00002478:  20202020
+l0000247c:  20202020
+l00002480:  20202020
+l00002484:  202f2020
+l00002488:  5c20203b
+l0000248c:  200a5c20
+l00002490:  20202020
+l00002494:  20202020
+l00002498:  20202020
+l0000249c:  27302020
+l000024a0:  2920272d
+l000024a4:  2d27602f
+l000024a8:  20200a30
+l000024ac:  20202020
+l000024b0:  20202020
+l000024b4:  20202020
+l000024b8:  20202020
+l000024bc:   a603020
+l000024c0:       a0a
+l000024c4:         0
+l000024c8:         0
+l000024cc:         0
+l000024d0:         0
+l000024d4:         0
+l000024d8:         0
+l000024dc:         0
+l000024e0:  10000000
+l000024e4:  ce38dc5b
+l000024e8:  1f2090d8
+l000024ec:  1238d7b9
+l000024f0:  ce139bf8
+l000024f4:  8e38de9b
+l000024f8:   2738bff
+l000024fc:  9b58c7bb
+l00002500:  ce738bf0
+l00002504:  ce3bc790
+l00002508:  3a738ad8
+l0000250c:  9b58c7bb
+l00002510:  ce738bf0
+l00002514:  5a72c79b
+l00002518:  7a139bfa
+l0000251c:  de38dfbc
+l00002520:  ab7093d8
+l00002524:  1238d7bc
+l00002528:  8b139bf8
+l0000252c:  de38d7b3
+l00002530:  de709bd3
+l00002534:  2a38d69b
+l00002538:  8b139bf8
+l0000253c:  de38d7b3
+l00002540:  4a399bd8
+l00002544:  de58c7b9
+l00002548:  cd7388d8
+l0000254c:  de73c593
+l00002550:  cd7199d8
+l00002554:  df71c593
+l00002558:  c67082d8
+l0000255c:  ca2bde9b
+l00002560:  b4119bf8
+l00002564:  1238d7bc
+l00002568:  7a139bf8
+l0000256c:  ce38d7bc
+l00002570:  ae738ad8
+l00002574:  e558c7b9
+l00002578:  31708b2f
+l0000257c:  1e2bd764
+l00002580:   a119bf8
+l00002584:  6a38d7bc
+l00002588:  8a738aff
+l0000258c:  de38d5b3
+l00002590:  e67199d8
+l00002594:  1a58c7ba
+l00002598:   2738bff
+l0000259c:  de58c7bb
+l000025a0:  5b2f9bd8
+l000025a4:  1238d7bc
+l000025a8:  ce139bf8
+l000025ac:  de64c79b
+l000025b0:  ce2296d8
+l000025b4:  d638c39b
+l000025b8:  ce139bf9
+l000025bc:  de38c59b
+l000025c0:  ce739adc
+l000025c4:  df3bc690
+l000025c8:  ca738bd8
+l000025cc:  de4ac79b
+l000025d0:  ce2396d8
+l000025d4:  de4bc79b
+l000025d8:  ce7399d9
+l000025dc:  de38c69b
+l000025e0:  cd738bd8
+l000025e4:  de4ac79b
+l000025e8:  ce009bd8
+l000025ec:  df38d69b
+l000025f0:  ce3899d8
+l000025f4:  fe2bd59b
+l000025f8:  cf109bf9
+l000025fc:  d23bd69b
+l00002600:  ce129bf9
+l00002604:  de38c79a
+l00002608:  ce009bd8
+l0000260c:  de69ca9b
+l00002610:  ce739fd8
+l00002614:  de38c29a
+l00002618:  ce739dda
+l0000261c:  de38d09b
+l00002620:  ce739bdc
+l00002624:  be38c69e
+l00002628:  c6139bf9
+l0000262c:  d63bd39b
+l00002630:  ce718dd8
+l00002634:  e22bd19b
+l00002638:  ce119bf9
+l0000263c:  de68ca9b
+l00002640:  ce009bd8
+l00002644:  de69c39b
+l00002648:  ce229ed8
+l0000264c:  de69c19b
+l00002650:  ce229cd8
+l00002654:  de69cf9b
+l00002658:  ce2292d8
+l0000265c:  de69cd9b
+l00002660:  ce2290d8
+l00002664:  de69ca9b
+l00002668:  ca31dbd8
+l0000266c:  7d7a979b
+l00002670:  de738d83
+l00002674:  3e6bc19b
+l00002678:  ce708dfa
+l0000267c:   338d09b
+l00002680:  de738862
+l00002684:  c96bc49b
+l00002688:  ce7088c1
+l0000268c:  da38c59f
+l00002690:  c62099d8
+l00002694:  de7a169b
+l00002698:  ce7099d5
+l0000269c:  de38ca9f
+l000026a0:  ce7096de
+l000026a4:  de39c596
+l000026a8:  ce2299d8
+l000026ac:  db38ca9f
+l000026b0:  c22196d8
+l000026b4:  de7ae69b
+l000026b8:  ce7096da
+l000026bc:  de68c59b
+l000026c0:  ce7299d5
+l000026c4:  de3ac299
+l000026c8:  ca7399dd
+l000026cc:  de6bc59b
+l000026d0:  ce314ad8
+l000026d4:  de3bc596
+l000026d8:  ce7396dd
+l000026dc:  de3bca9d
+l000026e0:  ce7299d5
+l000026e4:  de69c59b
+l000026e8:  cb7396dd
+l000026ec:  da6aca9b
+l000026f0:  ce31bad8
+l000026f4:  de3bca99
+l000026f8:  ce2399d8
+l000026fc:  de39c596
+l00002700:  ce719fda
+l00002704:  df3ac198
+l00002708:  ee708cd8
+l0000270c:  762bd09b
+l00002710:  ce119bf9
+l00002714:  da78879b
+l00002718:  ce33cbd8
+l0000271c:  de68ca9b
+l00002720:  ce2390d8
+l00002724:  de68cd9b
+l00002728:  ce2392d8
+l0000272c:  de68cf9b
+l00002730:  ce239cd8
+l00002734:  de68c19b
+l00002738:  ce239ed8
+l0000273c:  de68c39b
+l00002740:  ce009bd8
+l00002744:  de38d49b
+l00002748:  ce39bbd8
+l0000274c:  df3bc499
+l00002750:  cf708bd8
+l00002754:  de3ad69b
+l00002758:  aa608ad8
+l0000275c:  de5ac7b9
+l00002760:  ce739bdb
+l00002764:  de4bc79b
+l00002768:  76738ad8
+l0000276c:  de38d5b9
+l00002770:  cd7388d8
+l00002774:  de73c499
+l00002778:  7e609bdb
+l0000277c:  df5bc7b9
+l00002780:  cf7089d8
+l00002784:  ce3bd69b
+l00002788:  42608ad8
+l0000278c:  df5ac7b9
+l00002790:  ce718ad8
+l00002794:  de38c79a
+l00002798:  fe009bd8
+l0000279c:  eaa8f5aa
+l000027a0:  f6e7aded
+l000027a4:  bdf9a6a2
+l000027a8:  ceb6febc
+l000027ac:  b6f7a8f7
+l000027b0:  cedae3b9
+l000027b4:  fe91cd91
+l000027b8:  eef0bbf8
+l000027bc:  febbe7bb
+l000027c0:  eef0bbf8
+l000027c4:  f0b798bb
+l000027c8:  eef0bb87
+l000027cc:  d4bbe7bb
+l000027d0:  b2febbf8
+l000027d4:  febbebe7
+l000027d8:  eef0bbf8
+l000027dc:  fec4e8bb
+l000027e0:  ee8cc787
+l000027e4:  febbe7bb
+l000027e8:  e08cbbd2
+l000027ec:  f1b7e0fb
+l000027f0:  eef0bbf8
+l000027f4:  f9e7e7bb
+l000027f8:  eeacbc94
+l000027fc:  febbe7e7
+l00002800:  f3f091f8
+l00002804:  feb5ebbb
+l00002808:  eef0bbe5
+l0000280c:  a2bbe7bb
+l00002810:  b2fcb6f8
+l00002814:  febb8bbb
+l00002818:  eedabbf8
+l0000281c:  a2e7e7b4
+l00002820:  eef0c7f8
+l00002824:  f3b7e7bb
+l00002828:  e1f2c7ff
+l0000282c:  f0fbe0b7
+l00002830:  c4f0bbf8
+l00002834:  a2bbe7bb
+l00002838:  eef0bba4
+l0000283c:  f9b7e7bb
+l00002840:  aef0bbf8
+l00002844:  feb5ebb7
+l00002848:  eef0b5b8
+l0000284c:  febbe791
+l00002850:  918fe7f4
+l00002854:  f9b798c4
+l00002858:  e2f0b7f8
+l0000285c:  82bbe0a0
+l00002860:  eeacbba4
+l00002864:  e2bbe7bb
+l00002868:  fef0b6f5
+l0000286c:  8ebbaef9
+l00002870:  a5f0d58f
+l00002874:  bcaba9a8
+l00002878:  eef091e9
+l0000287c:  82e7f4b3
+l00002880:  eef0bbf8
+l00002884:  f1e7e8c4
+l00002888:  eef0bbff
+l0000288c:  a2bbbbc4
+l00002890:  eedabbf8
+l00002894:  a2e7e7bb
+l00002898:  e9fdb7f7
+l0000289c:  a2bbe7bc
+l000028a0:  e9fda5f8
+l000028a4:  f2c4e7bc
+l000028a8:  c4f0c784
+l000028ac:  a2bbe7bb
+l000028b0:  eef0bca4
+l000028b4:  febbe7bb
+l000028b8:  ee8ca6e5
+l000028bc:  febceab7
+l000028c0:  eef7b7f8
+l000028c4:  febbe791
+l000028c8:  eef0e7a4
+l000028cc:  febbe7bb
+l000028d0:  eef0e7f8
+l000028d4:  fec7e7cd
+l000028d8:  eef0e7f4
+l000028dc:  febbcdbb
+l000028e0:  eeace7f8
+l000028e4:  febbe7bb
+l000028e8:  eeacbbf8
+l000028ec:  a2bbe7bb
+l000028f0:  eeacbbb8
+l000028f4:  fe91e7bb
+l000028f8:  b2acbbf8
+l000028fc:  febbe7bb
+l00002900:  b2f0bbf8
+l00002904:  febbe7bb
+l00002908:  eef0bba4
+l0000290c:  d4bbe7c7
+l00002910:  b2f0bbf8
+l00002914:  febbe7e7
+l00002918:  eef0bbf8
+l0000291c:  febbe7e7
+l00002920:  eef0c7f8
+l00002924:  fec7e7bb
+l00002928:  eef0bbd2
+l0000292c:  febbbbe7
+l00002930:  eef0bbf8
+l00002934:  febbbbbb
+l00002938:  b2f0bbf8
+l0000293c:  febbe7bb
+l00002940:  eef09184
+l00002944:  fee7bbbb
+l00002948:  eef0bbf8
+l0000294c:  fee7e7bb
+l00002950:  eef0bbf8
+l00002954:  f2c49bbb
+l00002958:  eedabcf5
+l0000295c:  a2e7e7bb
+l00002960:  eef0bbf8
+l00002964:  a2bbe7bb
+l00002968:  e28fc487
+l0000296c:  fcb6eab7
+l00002970:  c48cc4f1
+l00002974:  a2bbe7bb
+l00002978:  eef0bba4
+l0000297c:  febbe7bb
+l00002980:  91acbbf8
+l00002984:  febbe7e7
+l00002988:  e1b3f8bb
+l0000298c:  febbe791
+l00002990:  eef0e7a4
+l00002994:  febbe7bb
+l00002998:  adb3bbf8
+l0000299c:  febbe8f8
+l000029a0:  eef0bbf8
+l000029a4:  febbcdbb
+l000029a8:  eeace7f8
+l000029ac:  febbe7bb
+l000029b0:  eef0bbf8
+l000029b4:  febbe7bb
+l000029b8:  c4f0bbf8
+l000029bc:  febbe791
+l000029c0:  829cde8f
+l000029c4:  90d483bb
+l000029c8:  97f0b79d
+l000029cc:  99d592d4
+l000029d0:  8a91cbf8
+l000029d4:  90da90da
+l000029d8:  eef091f6
+l000029dc:  98de85bb
+l000029e0:  ee95c997
+l000029e4:  97dce7d2
+l000029e8:  97f0de8e
+l000029ec:  87bb92d4
+l000029f0:  ee82ce97
+l000029f4:  9bd088cf
+l000029f8:  eef09196
+l000029fc:  fedd88bb
+l00002a00:  9c80cb99
+l00002a04:  9fd284de
+l00002a08:  809fd28c
+l00002a0c:  fed2e7b7
+l00002a10:  9a9eda8f
+l00002a14:  8bd49ebb
+l00002a18:  eef0bbd2
+l00002a1c:  8dbb88cf
+l00002a20:  ee87d490
+l00002a24:  87bb82d6
+l00002a28:  ee82ce97
+l00002a2c:  8dc982cb
+l00002a30:  8b84c891
+l00002a34:  d4bb93d5
+l00002a38:  8ff0bbf8
+l00002a3c:  89bb83d5
+l00002a40:  879cd791
+l00002a44:  9fbb80d5
+l00002a48:  879cd29a
+l00002a4c:  8dde8ecf
+l00002a50:  8b9ed4f8
+l00002a54:  febbe791
+l00002a58:  8b82d495
+l00002a5c:  93d293bb
+l00002a60:  c4dab59d
+l00002a64:  89bbe7bb
+l00002a68:  8b9ebb9d
+l00002a6c:  87bb83de
+l00002a70:  9af0ce97
+l00002a74:  8dcee7d4
+l00002a78:  8684bb9d
+l00002a7c:  91dde7de
+l00002a80:  ee95d88a
+l00002a84:  fedf89da
+l00002a88:  8b86d495
+l00002a8c:  9fcc86bb
+l00002a90:  eef09181
+l00002a94:  97d393bb
+l00002a98:  8797bb8b
+l00002a9c:  8ad586dc
+l00002aa0:  8cf0d891
+l00002aa4:  9ad792d4
+l00002aa8:  9df0c99d
+l00002aac:  92de8ed3
+l00002ab0:  899ed29c
+l00002ab4:  9bd393bb
+l00002ab8:  8d95c8f8
+l00002abc:  d4cf82c9
+l00002ac0:  97f0bbf8
+l00002ac4:  8dbb92d4
+l00002ac8:  e09bde9d
+l00002acc:  febbcd91
+l00002ad0:  999fd3f8
+l00002ad4:  8cde91de
+l00002ad8:  8189bbf4
+l00002adc:  8dbb95ce
+l00002ae0:  879dda8c
+l00002ae4:  8dbb86d5
+l00002ae8:  9d9dde9d
+l00002aec:  fed493bb
+l00002af0:  98f0de9a
+l00002af4:  fec295de
+l00002af8:  ee87d494
+l00002afc:  febbe791
+l00002b00:  8b84dd99
+l00002b04:  91c2e7c9
+l00002b08:  9ef0c98d
+l00002b0c:  97cd82c9
+l00002b10:  ee83ce97
+l00002b14:  91dd81de
+l00002b18:  ef83cf8a
+l00002b1c:  febbcd91
+l00002b20:  e995ccf8
+l00002b24:  99bb82c9
+l00002b28:  8f9ed597
+l00002b2c:  9fde83bb
+l00002b30:  8787bb94
+l00002b34:  8abb8fcf
+l00002b38:  ee83d290
+l00002b3c:  9dbb9ed9
+l00002b40:  879bd497
+l00002b44:  8bbb80d5
+l00002b48:  c491bb88
+l00002b4c:  8dbbe7bb
+l00002b50:  8793de88
+l00002b54:  8ebb8bda
+l00002b58:  8199cf97
+l00002b5c:  97bbe9d5
+l00002b60:  9891d3f8
+l00002b64:  96cfe7de
+l00002b68:  8b82bb9d
+l00002b6c:  9bcb8ed8
+l00002b70:  9d9fd6f8
+l00002b74:  fec28bcf
+l00002b78:  8582d48f
+l00002b7c:  fe9183de
+l00002b80:  9b9fbbf8
+l00002b84:  8bd9e7cf
+l00002b88:  8795bb8c
+l00002b8c:  fecf8fdc
+l00002b90:  9af0dd97
+l00002b94:  97bb82d3
+l00002b98:  8b82dc96
+l00002b9c:  90de8edf
+l00002ba0:  80f0c88c
+l00002ba4:  fedf82de
+l00002ba8:  879cbb99
+l00002bac:  9bd793cf
+l00002bb0:  eef0bbd2
+l00002bb4:  9fde90cf
+l00002bb8:  899ed293
+l00002bbc:  8ec8e7b5
+l00002bc0:  8899d89d
+l00002bc4:  96cfe7c2
+l00002bc8:  8099bb9d
+l00002bcc:  9ade95dc
+l00002bd0:  9a9ede91
+l00002bd4:  93ce89bb
+l00002bd8:  9d82de9a
+l00002bdc:  90d2efbb
+l00002be0:  9695d3f8
+l00002be4:  febbcdb2
+l00002be8:  8a9edaf8
+l00002bec:  9bd393bb
+l00002bf0:  8ff0c991
+l00002bf4:  93d484d8
+l00002bf8:  979eda88
+l00002bfc:  fedc89d2
+l00002c00:  8f95cc8c
+l00002c04:  9fcde7d0
+l00002c08:  9d95ce94
+l00002c0c:  fed493bb
+l00002c10:  ee95de8b
+l00002c14:  89bb81d2
+l00002c18:  eef0919d
+l00002c1c:  90da84bb
+l00002c20:  9c9fccf8
+l00002c24:  96cfe7d0
+l00002c28:  81f0c891
+l00002c2c:  d4b593ce
+l00002c30:  87d091d2
+l00002c34:  9bc980d5
+l00002c38:  8095d29c
+l00002c3c:  eeb3e7cf
+l00002c40:  eef9fdf5
+l00002c44:  debbf9bb
+l00002c48:  8f95cc8c
+l00002c4c:  9fcde7d0
+l00002c50:  ee95ce94
+l00002c54:  eab6f7b3
+l00002c58:  eeeebbf1
+l00002c5c:  fed0889b
+l00002c60:  9d84de94
+l00002c64:  87c993bb
+l00002c68:  8798cff8
+l00002c6c:  9bc9e7c8
+l00002c70:  8b80d29b
+l00002c74:  de91e9b5
+l00002c78:  e098dc8d
+l00002c7c:  96cfe7b5
+l00002c80:  9af0cf99
+l00002c84:  9bcf94da
+l00002c88:  8198bb8b
+l00002c8c:  9cd295c9
+l00002c90:  f4f0de94
+l00002c94:   19bcdb3
+l00002c98:  348b3929
+l00002c9c:  3befe1d7
+l00002ca0:  90668107
+l00002ca4:  b6d642f9
+l00002ca8:   a006285
+l00002cac:  784dfe8b
+l00002cb0:   e463717
+l00002cb4:  2cde2f5e
+l00002cb8:  413aa114
+l00002cbc:  6a82c67f
+l00002cc0:   ad4c434
+l00002cc4:  bb23cc9b
+l00002cc8:  b48e9662
+l00002ccc:   7f0b021
+l00002cd0:  73608b1f
+l00002cd4:  da158210
+l00002cd8:   6c6de16
+l00002cdc:  53f6279f
+l00002ce0:   edbe1fc
+l00002ce4:  c5250f0f
+l00002ce8:  89b8c9d0
+l00002cec:  f17a6e47
+l00002cf0:  71f6fb3d
+l00002cf4:  71137827
+l00002cf8:  522eff6e
+l00002cfc:  5ab2b8fb
+l00002d00:  6003bade
+l00002d04:  d6de6702
+l00002d08:  c46e5d2f
+l00002d0c:  3bc3e326
+l00002d10:  ca073ab1
+l00002d14:  55d9a9dc
+l00002d18:  29683bf1
+l00002d1c:  d1ecf24d
+l00002d20:  c0bffeea

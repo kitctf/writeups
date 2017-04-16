@@ -1,0 +1,924 @@
+00000000    de c0 1b a3      mov bp, 0xc0de
+00000004    10 00 0b f0      shl bp, 0x10
+00000008    c6 03 10 a3      mov r0, 0x3c6
+0000000c    6c 01 00 c3      call print_str
+00000010    e4 01 10 a3      mov r0, 0x1e4
+00000014    24 01 00 c3      call print_str_slow
+
+input_loop:
+00000018    bc 01 10 a3      mov r0, 0x1bc   # prompt
+0000001c    6c 01 00 c3      call print_str
+00000020    bf 05 10 a3      mov r0, 0x5bf
+00000024    00 0b 00 a0      mov r0, r0 + bp
+00000028    10 00 11 a3      mov r1, 0x10
+0000002c    10 01 00 c3      call read_str
+00000030    bf 05 16 a3      mov r6, 0x5bf
+00000034    00 00 11 a3      mov r1, 0x0
+00000038    00 00 06 e9      mov r0, byte [r6 + 0x0]
+0000003c    00 00 01 a0      mov r1, r1 + r0
+00000040    9b 00 11 a0      mov r1, r1 + 0x9b
+00000044    01 00 06 e9      mov r0, byte [r6 + 0x1]
+00000048    00 00 01 a0      mov r1, r1 + r0
+0000004c    ce 00 11 a0      mov r1, r1 + 0xce
+00000050    02 00 06 e9      mov r0, byte [r6 + 0x2]
+00000054    00 00 01 a0      mov r1, r1 + r0
+00000058    92 00 11 a0      mov r1, r1 + 0x92
+0000005c    03 00 06 e9      mov r0, byte [r6 + 0x3]
+00000060    00 00 01 a0      mov r1, r1 + r0
+00000064    ce 00 11 a0      mov r1, r1 + 0xce
+00000068    04 00 06 e9      mov r0, byte [r6 + 0x4]
+0000006c    00 00 01 a0      mov r1, r1 + r0
+00000070    8b 00 11 a0      mov r1, r1 + 0x8b
+00000074    05 00 06 e9      mov r0, byte [r6 + 0x5]
+00000078    00 00 01 a0      mov r1, r1 + r0
+0000007c    8d 00 11 a0      mov r1, r1 + 0x8d
+00000080    06 00 06 e9      mov r0, byte [r6 + 0x6]
+00000084    00 00 01 a0      mov r1, r1 + r0
+00000088    ce 00 11 a0      mov r1, r1 + 0xce
+0000008c    07 00 06 e9      mov r0, byte [r6 + 0x7]
+00000090    00 00 01 a0      mov r1, r1 + r0
+00000094    85 00 11 a0      mov r1, r1 + 0x85
+00000098    f8 07 11 b0      cmp r1, 0x7f8
+0000009c    ac 00 00 c0      jeq success
+000000a0    ac 03 10 a3      mov r0, 0x3ac        # NOPE
+000000a4    6c 01 00 c3      call print_str
+000000a8    18 00 00 c2      jmp input_loop
+
+yeah:
+000000ac    b9 03 10 a3      mov r0, 0x3b9        # YEAH
+000000b0    6c 01 00 c3      call print_str
+000000b4    df 05 10 a3      mov r0, 0x5df
+000000b8    34 0e 11 a3      mov r1, 0xe34
+000000bc    00 00 01 a1      mov r1, r1 - r0
+000000c0    df 05 13 a3      mov r3, 0x5df
+000000c4    00 01 07 a3      mov r7, r1
+000000c8    bf 05 15 a3      mov r5, 0x5bf
+000000cc    00 00 16 a3      mov r6, 0x0
+000000d0    00 00 14 a3      mov r4, 0x0
+000000d4    00 20 18 a3      mov r8, 0x2000
+
+loop:
+000000d8    04 03 00 e8      mov r0, byte [r3 + r4]
+000000dc    06 05 01 e8      mov r1, byte [r5 + r6]
+000000e0    aa 00 10 a2      mov r0, r0 ^ 0xaa
+000000e4    00 01 00 a2      mov r0, r0 ^ r1
+000000e8    04 08 00 ea      mov byte [r8 + r4], r0
+000000ec    01 00 16 a0      mov r6, r6 + 0x1
+000000f0    08 00 16 b0      cmp r6, 0x8
+000000f4    fc 00 00 c1      jne 0x00fc
+000000f8    00 00 16 a3      mov r6, 0x0
+000000fc    01 00 14 a0      mov r4, r4 + 0x1
+00000100    00 07 04 b0      cmp r4, r7
+00000104    d8 00 00 c1      jne loop
+00000108    00 20 00 c2      jmp 0x2000
+0000010c    00 00 00 ff      halt
+
+read_str:
+00000110    00 01 02 a3      mov r2, r1
+00000114    00 00 01 a3      mov r1, r0
+00000118    00 00 10 a3      mov r0, 0x0
+0000011c    03 00 00 d1      syscall 3
+00000120    00 00 00 d0      ret
+
+print_string_slow:
+00000124    00 00 04 f2      push r4
+00000128    00 00 04 a3      mov r4, r0
+0000012c    00 00 04 e9      mov r0, byte [r4 + 0x0]
+00000130    00 00 10 b0      cmp r0, 0x0
+00000134    64 01 00 c0      jeq 0x0164
+00000138    01 00 10 a3      mov r0, 0x1
+0000013c    00 04 01 a3      mov r1, r4
+00000140    00 0b 01 a0      mov r1, r1 + bp
+00000144    01 00 12 a3      mov r2, 0x1
+00000148    04 00 00 d1      syscall 4        # write
+0000014c    b4 01 10 a3      mov r0, 0x1b4
+00000150    00 0b 00 a0      mov r0, r0 + bp
+00000154    00 00 11 a3      mov r1, 0x0
+00000158    a2 00 00 d1      syscall 162      # nanosleep
+0000015c    01 00 14 a0      mov r4, r4 + 0x1
+00000160    2c 01 00 c2      jmp 0x012c
+00000164    00 00 04 f3      pop r4
+00000168    00 00 00 d0      ret
+
+print_str:
+0000016c    00 00 0d f2      push lr
+00000170    00 00 04 a3      mov r4, r0
+00000174    94 01 00 c3      call strlen
+00000178    00 00 02 a3      mov r2, r0
+0000017c    00 04 01 a3      mov r1, r4
+00000180    00 0b 01 a0      mov r1, r1 + bp
+00000184    01 00 10 a3      mov r0, 0x1
+00000188    04 00 00 d1      syscall 4
+0000018c    00 00 0d f3      pop lr
+00000190    00 00 00 d0      ret
+
+strlen:
+00000194    00 00 11 a3      mov r1, 0x0
+00000198    01 00 02 e8      mov r2, byte [r0 + r1]
+0000019c    00 00 12 b0      cmp r2, 0x0
+000001a0    ac 01 00 c0      jeq 0x01ac
+000001a4    01 00 11 a0      mov r1, r1 + 0x1
+000001a8    98 01 00 c2      jmp 0x0198
+000001ac    00 01 00 a3      mov r0, r1
+000001b0    00 00 00 d0      ret
+
+000001b4    00 00 00 00      <unknown>
+000001b8    ff ff ff 00      <unknown>
+000001bc    20 20 23 23      <unknown>
+000001c0    23 20 57 48      <unknown>
+000001c4    30 27 53 20      <unknown>
+000001c8    59 30 55 52      <unknown>
+000001cc    20 46 34 56      <unknown>
+000001d0    30 52 69 54      <unknown>
+000001d4    45 20 43 4c      <unknown>
+000001d8    30 57 4e 3f      <unknown>
+000001dc    0a 20 20 3e      <unknown>
+000001e0    3e 3e 20 00      <unknown>
+000001e4    0a 0a 20 20      <unknown>
+000001e8    54 4f 4f 20      <unknown>
+000001ec    53 48 41 52      <unknown>
+000001f0    50 20 46 4f      <unknown>
+000001f4    52 20 54 48      <unknown>
+000001f8    45 20 52 45      <unknown>
+000001fc    53 54 2c 20      <unknown>
+00000200    53 49 4d 50      <unknown>
+00000204    4c 59 20 54      <unknown>
+00000208    48 45 20 42      <unknown>
+0000020c    45 53 54 20      <unknown>
+00000210    0a 20 20 45      <unknown>
+00000214    4c 55 53 49      <unknown>
+00000218    56 45 20 41      <unknown>
+0000021c    4e 44 20 4f      <unknown>
+00000220    42 53 43 55      <unknown>
+00000224    52 45 20 4c      <unknown>
+00000228    49 4b 45 20      <unknown>
+0000022c    54 48 45 52      <unknown>
+00000230    45 27 53 20      <unknown>
+00000234    4e 4f 20 43      <unknown>
+00000238    4f 4e 54 45      <unknown>
+0000023c    53 54 0a 20      <unknown>
+00000240    20 54 48 49      <unknown>
+00000244    53 20 49 53      <unknown>
+00000248    20 54 48 45      <unknown>
+0000024c    20 57 49 4c      <unknown>
+00000250    44 20 57 49      <unknown>
+00000254    4c 44 20 57      <unknown>
+00000258    45 53 54 2c      <unknown>
+0000025c    20 43 4f 4d      <unknown>
+00000260    45 20 41 4e      <unknown>
+00000264    44 20 42 52      <unknown>
+00000268    45 41 4b 20      <unknown>
+0000026c    49 4e 54 4f      <unknown>
+00000270    20 54 48 49      <unknown>
+00000274    53 20 43 48      <unknown>
+00000278    45 53 54 0a      <unknown>
+0000027c    0a 20 20 48      <unknown>
+00000280    4f 4c 4d 45      <unknown>
+00000284    53 2c 20 49      <unknown>
+00000288    20 47 4f 54      <unknown>
+0000028c    20 47 52 45      <unknown>
+00000290    41 54 20 44      <unknown>
+00000294    41 59 20 53      <unknown>
+00000298    48 49 54 20      <unknown>
+0000029c    0a 20 20 4d      <unknown>
+000002a0    59 20 30 44      <unknown>
+000002a4    41 59 7a 20      <unknown>
+000002a8    47 4f 54 20      <unknown>
+000002ac    54 48 45 20      <unknown>
+000002b0    53 43 45 4e      <unknown>
+000002b4    45 20 47 4f      <unknown>
+000002b8    49 4e 27 20      <unknown>
+000002bc    41 50 45 20      <unknown>
+000002c0    53 48 49 54      <unknown>
+000002c4    0a 20 20 52      <unknown>
+000002c8    4f 50 50 49      <unknown>
+000002cc    4e 27 20 49      <unknown>
+000002d0    4e 20 41 20      <unknown>
+000002d4    42 4f 41 54      <unknown>
+000002d8    20 4c 49 4b      <unknown>
+000002dc    45 20 54 48      <unknown>
+000002e0    45 20 43 41      <unknown>
+000002e4    50 27 4e 20      <unknown>
+000002e8    4f 46 20 54      <unknown>
+000002ec    48 45 20 53      <unknown>
+000002f0    48 49 50 0a      <unknown>
+000002f4    20 20 59 4f      <unknown>
+000002f8    55 20 4c 41      <unknown>
+000002fc    4d 45 53 20      <unknown>
+00000300    41 49 4e 27      <unknown>
+00000304    54 20 53 48      <unknown>
+00000308    49 54 2c 20      <unknown>
+0000030c    49 20 4d 41      <unknown>
+00000310    4b 45 20 43      <unknown>
+00000314    48 41 4e 47      <unknown>
+00000318    45 20 51 55      <unknown>
+0000031c    49 43 4b 0a      <unknown>
+00000320    20 20 49 4d      <unknown>
+00000324    20 43 4f 4e      <unknown>
+00000328    54 41 49 4e      <unknown>
+0000032c    45 44 20 49      <unknown>
+00000330    4e 20 54 48      <unknown>
+00000334    45 20 53 54      <unknown>
+00000338    41 43 4b 46      <unknown>
+0000033c    52 41 4d 45      <unknown>
+00000340    20 57 49 54      <unknown>
+00000344    48 20 54 48      <unknown>
+00000348    45 20 43 4f      <unknown>
+0000034c    44 45 20 49      <unknown>
+00000350    20 52 49 50      <unknown>
+00000354    50 45 44 20      <unknown>
+00000358    0a 0a 20 20      <unknown>
+0000035c    53 4f 20 53      <unknown>
+00000360    54 45 50 20      <unknown>
+00000364    42 41 43 4b      <unknown>
+00000368    20 43 55 53      <unknown>
+0000036c    20 43 4c 4f      <unknown>
+00000370    57 4e 53 20      <unknown>
+00000374    41 52 45 20      <unknown>
+00000378    4c 49 4b 45      <unknown>
+0000037c    20 54 48 41      <unknown>
+00000380    54 2c 0a 20      <unknown>
+00000384    20 57 45 20      <unknown>
+00000388    57 41 4c 4b      <unknown>
+0000038c    20 4f 56 45      <unknown>
+00000390    52 20 48 41      <unknown>
+00000394    43 4b 45 52      <unknown>
+00000398    53 20 4c 49      <unknown>
+0000039c    4b 45 20 41      <unknown>
+000003a0    20 44 4f 4f      <unknown>
+000003a4    52 4d 41 54      <unknown>
+000003a8    21 0a 0a 00      <unknown>
+000003ac    20 20 24 24      <unknown>
+000003b0    24 20 4e 4f      <unknown>
+000003b4    50 45 21 0a      <unknown>
+000003b8    00 20 20 24      <unknown>
+000003bc    24 24 20 59      <unknown>
+000003c0    45 41 48 21      <unknown>
+000003c4    0a 00 0a 20      <unknown>
+000003c8    20 20 20 20      <unknown>
+000003cc    20 20 20 20      <unknown>
+000003d0    20 20 20 20      <unknown>
+000003d4    20 20 5f 0a      <unknown>
+000003d8    20 20 20 20      <unknown>
+000003dc    20 20 20 20      <unknown>
+000003e0    20 20 20 20      <unknown>
+000003e4    20 20 28 5f      <unknown>
+000003e8    29 20 20 20      <unknown>
+000003ec    20 20 20 20      <unknown>
+000003f0    20 20 20 5f      <unknown>
+000003f4    0a 20 20 20      <unknown>
+000003f8    20 20 20 20      <unknown>
+000003fc    20 20 20 5f      <unknown>
+00000400    20 20 20 20      <unknown>
+00000404    20 20 20 20      <unknown>
+00000408    20 2e 3d 2e      <unknown>
+0000040c    20 20 20 28      <unknown>
+00000410    5f 29 0a 20      <unknown>
+00000414    20 20 20 20      <unknown>
+00000418    20 20 20 20      <unknown>
+0000041c    28 5f 29 20      <unknown>
+00000420    20 20 5f 20      <unknown>
+00000424    20 20 2f 2f      <unknown>
+00000428    28 60 29 5f      <unknown>
+0000042c    0a 20 20 20      <unknown>
+00000430    20 20 20 20      <unknown>
+00000434    20 20 20 20      <unknown>
+00000438    20 20 20 2f      <unknown>
+0000043c    2f 60 5c 2f      <unknown>
+00000440    20 7c 5c 20      <unknown>
+00000444    30 60 5c 5c      <unknown>
+00000448    0a 20 20 20      <unknown>
+0000044c    20 20 20 20      <unknown>
+00000450    20 20 20 20      <unknown>
+00000454    20 20 20 7c      <unknown>
+00000458    7c 2d 2e 5c      <unknown>
+0000045c    5f 7c 5f 2f      <unknown>
+00000460    2e 2d 7c 7c      <unknown>
+00000464    0a 20 20 20      <unknown>
+00000468    20 20 20 20      <unknown>
+0000046c    20 20 20 20      <unknown>
+00000470    20 20 20 29      <unknown>
+00000474    2f 20 7c 5f      <unknown>
+00000478    5f 5f 5f 5f      <unknown>
+0000047c    7c 20 5c 28      <unknown>
+00000480    20 20 20 20      <unknown>
+00000484    5f 0a 20 20      <unknown>
+00000488    20 20 20 20      <unknown>
+0000048c    20 20 20 20      <unknown>
+00000490    20 20 20 30      <unknown>
+00000494    20 20 20 23      <unknown>
+00000498    2f 5c 20 2f      <unknown>
+0000049c    5c 23 20 20      <unknown>
+000004a0    30 20 20 20      <unknown>
+000004a4    28 5f 29 0a      <unknown>
+000004a8    20 20 20 20      <unknown>
+000004ac    20 20 20 20      <unknown>
+000004b0    20 20 20 20      <unknown>
+000004b4    20 20 20 20      <unknown>
+000004b8    5f 7c 20 6f      <unknown>
+000004bc    20 6f 20 7c      <unknown>
+000004c0    5f 0a 20 20      <unknown>
+000004c4    20 20 20 20      <unknown>
+000004c8    20 20 20 5f      <unknown>
+000004cc    20 20 20 20      <unknown>
+000004d0    20 28 28 7c      <unknown>
+000004d4    2c 20 5e 20      <unknown>
+000004d8    2c 7c 29 29      <unknown>
+000004dc    0a 20 20 20      <unknown>
+000004e0    20 20 20 20      <unknown>
+000004e4    20 28 5f 29      <unknown>
+000004e8    20 20 20 20      <unknown>
+000004ec    20 60 7c 7c      <unknown>
+000004f0    5c 5f 2f 7c      <unknown>
+000004f4    7c 60 0a 20      <unknown>
+000004f8    20 20 20 20      <unknown>
+000004fc    20 20 20 20      <unknown>
+00000500    20 20 20 20      <unknown>
+00000504    20 20 20 20      <unknown>
+00000508    7c 7c 20 5f      <unknown>
+0000050c    20 7c 7c 20      <unknown>
+00000510    20 20 20 20      <unknown>
+00000514    20 5f 0a 20      <unknown>
+00000518    20 20 20 20      <unknown>
+0000051c    20 20 20 20      <unknown>
+00000520    20 20 20 20      <unknown>
+00000524    20 20 20 20      <unknown>
+00000528    7c 20 5c 5f      <unknown>
+0000052c    2f 20 7c 20      <unknown>
+00000530    20 20 20 20      <unknown>
+00000534    28 5f 29 0a      <unknown>
+00000538    20 20 20 20      <unknown>
+0000053c    20 20 20 20      <unknown>
+00000540    20 20 20 20      <unknown>
+00000544    20 30 2e 5f      <unknown>
+00000548    5f 2e 5c 20      <unknown>
+0000054c    20 20 2f 2e      <unknown>
+00000550    5f 5f 2e 30      <unknown>
+00000554    0a 20 20 20      <unknown>
+00000558    20 20 20 20      <unknown>
+0000055c    20 20 20 20      <unknown>
+00000560    20 20 20 60      <unknown>
+00000564    2e 5f 20 20      <unknown>
+00000568    60 22 60 20      <unknown>
+0000056c    20 5f 2e 27      <unknown>
+00000570    0a 20 20 20      <unknown>
+00000574    20 20 20 20      <unknown>
+00000578    20 20 20 20      <unknown>
+0000057c    20 20 20 20      <unknown>
+00000580    20 20 2f 20      <unknown>
+00000584    3b 20 20 5c      <unknown>
+00000588    20 5c 0a 20      <unknown>
+0000058c    20 20 20 20      <unknown>
+00000590    20 20 20 20      <unknown>
+00000594    20 20 20 20      <unknown>
+00000598    20 20 30 27      <unknown>
+0000059c    2d 27 20 29      <unknown>
+000005a0    2f 60 27 2d      <unknown>
+000005a4    30 0a 20 20      <unknown>
+000005a8    20 20 20 20      <unknown>
+000005ac    20 20 20 20      <unknown>
+000005b0    20 20 20 20      <unknown>
+000005b4    20 20 20 20      <unknown>
+000005b8    20 30 60 0a      <unknown>
+000005bc    0a 0a 00 00      <unknown>
+000005c0    00 00 00 00      <unknown>
+000005c4    00 00 00 00      <unknown>
+000005c8    00 00 00 00      <unknown>
+000005cc    00 00 00 00      <unknown>
+000005d0    00 00 00 00      <unknown>
+000005d4    00 00 00 00      <unknown>
+000005d8    00 00 00 00      <unknown>
+000005dc    00 00 00 10      <unknown>
+000005e0    5b dc 38 ce      <unknown>
+000005e4    d8 90 20 1f      <unknown>
+000005e8    b9 d7 38 12      <unknown>
+000005ec    f8 9b 13 ce      <unknown>
+000005f0    9b de 38 8e      <unknown>
+000005f4    ff 8b 73 02      <unknown>
+000005f8    bb c7 58 9b      <unknown>
+000005fc    f0 8b 73 ce      <unknown>
+00000600    90 c7 3b ce      <unknown>
+00000604    d8 8a 73 3a      <unknown>
+00000608    bb c7 58 9b      <unknown>
+0000060c    f0 8b 73 ce      <unknown>
+00000610    9b c7 72 5a      <unknown>
+00000614    fa 9b 13 7a      <unknown>
+00000618    bc df 38 de      <unknown>
+0000061c    d8 93 70 ab      <unknown>
+00000620    bc d7 38 12      <unknown>
+00000624    f8 9b 13 8b      <unknown>
+00000628    b3 d7 38 de      <unknown>
+0000062c    d3 9b 70 de      <unknown>
+00000630    9b d6 38 2a      <unknown>
+00000634    f8 9b 13 8b      <unknown>
+00000638    b3 d7 38 de      <unknown>
+0000063c    d8 9b 39 4a      <unknown>
+00000640    b9 c7 58 de      <unknown>
+00000644    d8 88 73 cd      <unknown>
+00000648    93 c5 73 de      <unknown>
+0000064c    d8 99 71 cd      <unknown>
+00000650    93 c5 71 df      <unknown>
+00000654    d8 82 70 c6      <unknown>
+00000658    9b de 2b ca      <unknown>
+0000065c    f8 9b 11 b4      <unknown>
+00000660    bc d7 38 12      <unknown>
+00000664    f8 9b 13 7a      <unknown>
+00000668    bc d7 38 ce      <unknown>
+0000066c    d8 8a 73 ae      <unknown>
+00000670    b9 c7 58 e5      mov r5, word [r8 + 0xc7b9]
+00000674    2f 8b 70 31      <unknown>
+00000678    64 d7 2b 1e      <unknown>
+0000067c    f8 9b 11 0a      <unknown>
+00000680    bc d7 38 6a      <unknown>
+00000684    ff 8a 73 8a      <unknown>
+00000688    b3 d5 38 de      <unknown>
+0000068c    d8 99 71 e6      mov word [r153 + r216], bp3
+00000690    ba c7 58 1a      <unknown>
+00000694    ff 8b 73 02      <unknown>
+00000698    bb c7 58 de      <unknown>
+0000069c    d8 9b 2f 5b      <unknown>
+000006a0    bc d7 38 12      <unknown>
+000006a4    f8 9b 13 ce      <unknown>
+000006a8    9b c7 64 de      <unknown>
+000006ac    d8 96 22 ce      <unknown>
+000006b0    9b c3 38 d6      <unknown>
+000006b4    f9 9b 13 ce      <unknown>
+000006b8    9b c5 38 de      <unknown>
+000006bc    dc 9a 73 ce      <unknown>
+000006c0    90 c6 3b df      <unknown>
+000006c4    d8 8b 73 ca      <unknown>
+000006c8    9b c7 4a de      <unknown>
+000006cc    d8 96 23 ce      <unknown>
+000006d0    9b c7 4b de      <unknown>
+000006d4    d9 99 73 ce      <unknown>
+000006d8    9b c6 38 de      <unknown>
+000006dc    d8 8b 73 cd      <unknown>
+000006e0    9b c7 4a de      <unknown>
+000006e4    d8 9b 00 ce      <unknown>
+000006e8    9b d6 38 df      <unknown>
+000006ec    d8 99 38 ce      <unknown>
+000006f0    9b d5 2b fe      <unknown>
+000006f4    f9 9b 10 cf      <unknown>
+000006f8    9b d6 3b d2      <unknown>
+000006fc    f9 9b 12 ce      <unknown>
+00000700    9a c7 38 de      <unknown>
+00000704    d8 9b 00 ce      <unknown>
+00000708    9b ca 69 de      <unknown>
+0000070c    d8 9f 73 ce      <unknown>
+00000710    9a c2 38 de      <unknown>
+00000714    da 9d 73 ce      <unknown>
+00000718    9b d0 38 de      <unknown>
+0000071c    dc 9b 73 ce      <unknown>
+00000720    9e c6 38 be      <unknown>
+00000724    f9 9b 13 c6      <unknown>
+00000728    9b d3 3b d6      <unknown>
+0000072c    d8 8d 71 ce      <unknown>
+00000730    9b d1 2b e2      mov dword [r209 + r155], r43
+00000734    f9 9b 11 ce      <unknown>
+00000738    9b ca 68 de      <unknown>
+0000073c    d8 9b 00 ce      <unknown>
+00000740    9b c3 69 de      <unknown>
+00000744    d8 9e 22 ce      <unknown>
+00000748    9b c1 69 de      <unknown>
+0000074c    d8 9c 22 ce      <unknown>
+00000750    9b cf 69 de      <unknown>
+00000754    d8 92 22 ce      <unknown>
+00000758    9b cd 69 de      <unknown>
+0000075c    d8 90 22 ce      <unknown>
+00000760    9b ca 69 de      <unknown>
+00000764    d8 db 31 ca      <unknown>
+00000768    9b 97 7a 7d      <unknown>
+0000076c    83 8d 73 de      <unknown>
+00000770    9b c1 6b 3e      <unknown>
+00000774    fa 8d 70 ce      <unknown>
+00000778    9b d0 38 03      <unknown>
+0000077c    62 88 73 de      <unknown>
+00000780    9b c4 6b c9      <unknown>
+00000784    c1 88 70 ce      <unknown>
+00000788    9f c5 38 da      <unknown>
+0000078c    d8 99 20 c6      <unknown>
+00000790    9b 16 7a de      <unknown>
+00000794    d5 99 70 ce      <unknown>
+00000798    9f ca 38 de      <unknown>
+0000079c    de 96 70 ce      <unknown>
+000007a0    96 c5 39 de      <unknown>
+000007a4    d8 99 22 ce      <unknown>
+000007a8    9f ca 38 db      <unknown>
+000007ac    d8 96 21 c2      jmp 0x96d8
+000007b0    9b e6 7a de      <unknown>
+000007b4    da 96 70 ce      <unknown>
+000007b8    9b c5 68 de      <unknown>
+000007bc    d5 99 72 ce      <unknown>
+000007c0    99 c2 3a de      <unknown>
+000007c4    dd 99 73 ca      <unknown>
+000007c8    9b c5 6b de      <unknown>
+000007cc    d8 4a 31 ce      <unknown>
+000007d0    96 c5 3b de      <unknown>
+000007d4    dd 96 73 ce      <unknown>
+000007d8    9d ca 3b de      <unknown>
+000007dc    d5 99 72 ce      <unknown>
+000007e0    9b c5 69 de      <unknown>
+000007e4    dd 96 73 cb      <unknown>
+000007e8    9b ca 6a da      <unknown>
+000007ec    d8 ba 31 ce      <unknown>
+000007f0    99 ca 3b de      <unknown>
+000007f4    d8 99 23 ce      <unknown>
+000007f8    96 c5 39 de      <unknown>
+000007fc    da 9f 71 ce      <unknown>
+00000800    98 c1 3a df      <unknown>
+00000804    d8 8c 70 ee      <unknown>
+00000808    9b d0 2b 76      <unknown>
+0000080c    f9 9b 11 ce      <unknown>
+00000810    9b 87 78 da      <unknown>
+00000814    d8 cb 33 ce      <unknown>
+00000818    9b ca 68 de      <unknown>
+0000081c    d8 90 23 ce      <unknown>
+00000820    9b cd 68 de      <unknown>
+00000824    d8 92 23 ce      <unknown>
+00000828    9b cf 68 de      <unknown>
+0000082c    d8 9c 23 ce      <unknown>
+00000830    9b c1 68 de      <unknown>
+00000834    d8 9e 23 ce      <unknown>
+00000838    9b c3 68 de      <unknown>
+0000083c    d8 9b 00 ce      <unknown>
+00000840    9b d4 38 de      <unknown>
+00000844    d8 bb 39 ce      <unknown>
+00000848    99 c4 3b df      <unknown>
+0000084c    d8 8b 70 cf      <unknown>
+00000850    9b d6 3a de      <unknown>
+00000854    d8 8a 60 aa      <unknown>
+00000858    b9 c7 5a de      <unknown>
+0000085c    db 9b 73 ce      <unknown>
+00000860    9b c7 4b de      <unknown>
+00000864    d8 8a 73 76      <unknown>
+00000868    b9 d5 38 de      <unknown>
+0000086c    d8 88 73 cd      <unknown>
+00000870    99 c4 73 de      <unknown>
+00000874    db 9b 60 7e      <unknown>
+00000878    b9 c7 5b df      <unknown>
+0000087c    d8 89 70 cf      <unknown>
+00000880    9b d6 3b ce      <unknown>
+00000884    d8 8a 60 42      <unknown>
+00000888    b9 c7 5a df      <unknown>
+0000088c    d8 8a 71 ce      <unknown>
+00000890    9a c7 38 de      <unknown>
+00000894    d8 9b 00 fe      <unknown>
+00000898    aa f5 a8 ea      mov byte [r245 + r170], r168
+0000089c    ed ad e7 f6      <unknown>
+000008a0    a2 a6 f9 bd      <unknown>
+000008a4    bc fe b6 ce      <unknown>
+000008a8    f7 a8 f7 b6      <unknown>
+000008ac    b9 e3 da ce      <unknown>
+000008b0    91 cd 91 fe      <unknown>
+000008b4    f8 bb f0 ee      <unknown>
+000008b8    bb e7 bb fe      <unknown>
+000008bc    f8 bb f0 ee      <unknown>
+000008c0    bb 98 b7 f0      shl r183, 0x98bb
+000008c4    87 bb f0 ee      <unknown>
+000008c8    bb e7 bb d4      <unknown>
+000008cc    f8 bb fe b2      <unknown>
+000008d0    e7 eb bb fe      <unknown>
+000008d4    f8 bb f0 ee      <unknown>
+000008d8    bb e8 c4 fe      <unknown>
+000008dc    87 c7 8c ee      <unknown>
+000008e0    bb e7 bb fe      <unknown>
+000008e4    d2 bb 8c e0      mov r140, dword [r187 + r210]
+000008e8    fb e0 b7 f1      shr r183, 0xe0fb
+000008ec    f8 bb f0 ee      <unknown>
+000008f0    bb e7 e7 f9      <unknown>
+000008f4    94 bc ac ee      <unknown>
+000008f8    e7 e7 bb fe      <unknown>
+000008fc    f8 91 f0 f3      pop r240
+00000900    bb eb b5 fe      <unknown>
+00000904    e5 bb f0 ee      <unknown>
+00000908    bb e7 bb a2      mov bp, bp ^ 0xe7bb
+0000090c    f8 b6 fc b2      <unknown>
+00000910    bb 8b bb fe      <unknown>
+00000914    f8 bb da ee      <unknown>
+00000918    b4 e7 e7 a2      mov r231, r231 ^ r231
+0000091c    f8 c7 f0 ee      <unknown>
+00000920    bb e7 b7 f3      pop r183
+00000924    ff c7 f2 e1      mov r15, dword [r2 + 0xc7ff]
+00000928    b7 e0 fb f0      shl r251, 0xe0b7
+0000092c    f8 bb f0 c4      <unknown>
+00000930    bb e7 bb a2      mov bp, bp ^ 0xe7bb
+00000934    a4 bb f0 ee      <unknown>
+00000938    bb e7 b7 f9      <unknown>
+0000093c    f8 bb f0 ae      <unknown>
+00000940    b7 eb b5 fe      <unknown>
+00000944    b8 b5 f0 ee      <unknown>
+00000948    91 e7 bb fe      <unknown>
+0000094c    f4 e7 8f 91      <unknown>
+00000950    c4 98 b7 f9      <unknown>
+00000954    f8 b7 f0 e2      mov dword [r183 + r248], r240
+00000958    a0 e0 bb 82      <unknown>
+0000095c    a4 bb ac ee      <unknown>
+00000960    bb e7 bb e2      mov dword [r231 + r187], r187
+00000964    f5 b6 f0 fe      <unknown>
+00000968    f9 ae bb 8e      <unknown>
+0000096c    8f d5 f0 a5      <unknown>
+00000970    a8 a9 ab bc      <unknown>
+00000974    e9 91 f0 ee      <unknown>
+00000978    b3 f4 e7 82      <unknown>
+0000097c    f8 bb f0 ee      <unknown>
+00000980    c4 e8 e7 f1      shr r231, 0xe8c4
+00000984    ff bb f0 ee      <unknown>
+00000988    c4 bb bb a2      mov bp, bp ^ 0xbbc4
+0000098c    f8 bb da ee      <unknown>
+00000990    bb e7 e7 a2      mov r231, r231 ^ r231
+00000994    f7 b7 fd e9      mov r15, byte [lr + 0xb7f7]
+00000998    bc e7 bb a2      mov bp, bp ^ 0xe7bc
+0000099c    f8 a5 fd e9      mov r15, byte [lr + 0xa5f8]
+000009a0    bc e7 c4 f2      push r196
+000009a4    84 c7 f0 c4      <unknown>
+000009a8    bb e7 bb a2      mov bp, bp ^ 0xe7bb
+000009ac    a4 bc f0 ee      <unknown>
+000009b0    bb e7 bb fe      <unknown>
+000009b4    e5 a6 8c ee      <unknown>
+000009b8    b7 ea bc fe      <unknown>
+000009bc    f8 b7 f7 ee      <unknown>
+000009c0    91 e7 bb fe      <unknown>
+000009c4    a4 e7 f0 ee      <unknown>
+000009c8    bb e7 bb fe      <unknown>
+000009cc    f8 e7 f0 ee      <unknown>
+000009d0    cd e7 c7 fe      <unknown>
+000009d4    f4 e7 f0 ee      <unknown>
+000009d8    bb cd bb fe      <unknown>
+000009dc    f8 e7 ac ee      <unknown>
+000009e0    bb e7 bb fe      <unknown>
+000009e4    f8 bb ac ee      <unknown>
+000009e8    bb e7 bb a2      mov bp, bp ^ 0xe7bb
+000009ec    b8 bb ac ee      <unknown>
+000009f0    bb e7 91 fe      <unknown>
+000009f4    f8 bb ac b2      <unknown>
+000009f8    bb e7 bb fe      <unknown>
+000009fc    f8 bb f0 b2      <unknown>
+00000a00    bb e7 bb fe      <unknown>
+00000a04    a4 bb f0 ee      <unknown>
+00000a08    c7 e7 bb d4      <unknown>
+00000a0c    f8 bb f0 b2      <unknown>
+00000a10    e7 e7 bb fe      <unknown>
+00000a14    f8 bb f0 ee      <unknown>
+00000a18    e7 e7 bb fe      <unknown>
+00000a1c    f8 c7 f0 ee      <unknown>
+00000a20    bb e7 c7 fe      <unknown>
+00000a24    d2 bb f0 ee      <unknown>
+00000a28    e7 bb bb fe      <unknown>
+00000a2c    f8 bb f0 ee      <unknown>
+00000a30    bb bb bb fe      <unknown>
+00000a34    f8 bb f0 b2      <unknown>
+00000a38    bb e7 bb fe      <unknown>
+00000a3c    84 91 f0 ee      <unknown>
+00000a40    bb bb e7 fe      <unknown>
+00000a44    f8 bb f0 ee      <unknown>
+00000a48    bb e7 e7 fe      <unknown>
+00000a4c    f8 bb f0 ee      <unknown>
+00000a50    bb 9b c4 f2      push r196
+00000a54    f5 bc da ee      <unknown>
+00000a58    bb e7 e7 a2      mov r231, r231 ^ r231
+00000a5c    f8 bb f0 ee      <unknown>
+00000a60    bb e7 bb a2      mov bp, bp ^ 0xe7bb
+00000a64    87 c4 8f e2      mov dword [r196 + r135], r143
+00000a68    b7 ea b6 fc      <unknown>
+00000a6c    f1 c4 8c c4      <unknown>
+00000a70    bb e7 bb a2      mov bp, bp ^ 0xe7bb
+00000a74    a4 bb f0 ee      <unknown>
+00000a78    bb e7 bb fe      <unknown>
+00000a7c    f8 bb ac 91      <unknown>
+00000a80    e7 e7 bb fe      <unknown>
+00000a84    bb f8 b3 e1      mov bp, dword [r3 + 0xf8bb]
+00000a88    91 e7 bb fe      <unknown>
+00000a8c    a4 e7 f0 ee      <unknown>
+00000a90    bb e7 bb fe      <unknown>
+00000a94    f8 bb b3 ad      <unknown>
+00000a98    f8 e8 bb fe      <unknown>
+00000a9c    f8 bb f0 ee      <unknown>
+00000aa0    bb cd bb fe      <unknown>
+00000aa4    f8 e7 ac ee      <unknown>
+00000aa8    bb e7 bb fe      <unknown>
+00000aac    f8 bb f0 ee      <unknown>
+00000ab0    bb e7 bb fe      <unknown>
+00000ab4    f8 bb f0 c4      <unknown>
+00000ab8    91 e7 bb fe      <unknown>
+00000abc    8f de 9c 82      <unknown>
+00000ac0    bb 83 d4 90      <unknown>
+00000ac4    9d b7 f0 97      <unknown>
+00000ac8    d4 92 d5 99      <unknown>
+00000acc    f8 cb 91 8a      <unknown>
+00000ad0    da 90 da 90      <unknown>
+00000ad4    f6 91 f0 ee      <unknown>
+00000ad8    bb 85 de 98      <unknown>
+00000adc    97 c9 95 ee      <unknown>
+00000ae0    d2 e7 dc 97      <unknown>
+00000ae4    8e de f0 97      <unknown>
+00000ae8    d4 92 bb 87      <unknown>
+00000aec    97 ce 82 ee      <unknown>
+00000af0    cf 88 d0 9b      <unknown>
+00000af4    96 91 f0 ee      <unknown>
+00000af8    bb 88 dd fe      <unknown>
+00000afc    99 cb 80 9c      <unknown>
+00000b00    de 84 d2 9f      <unknown>
+00000b04    8c d2 9f 80      <unknown>
+00000b08    b7 e7 d2 fe      <unknown>
+00000b0c    8f da 9e 9a      <unknown>
+00000b10    bb 9e d4 8b      <unknown>
+00000b14    d2 bb f0 ee      <unknown>
+00000b18    cf 88 bb 8d      <unknown>
+00000b1c    90 d4 87 ee      <unknown>
+00000b20    d6 82 bb 87      <unknown>
+00000b24    97 ce 82 ee      <unknown>
+00000b28    cb 82 c9 8d      <unknown>
+00000b2c    91 c8 84 8b      <unknown>
+00000b30    d5 93 bb d4      <unknown>
+00000b34    f8 bb f0 8f      <unknown>
+00000b38    d5 83 bb 89      <unknown>
+00000b3c    91 d7 9c 87      <unknown>
+00000b40    d5 80 bb 9f      <unknown>
+00000b44    9a d2 9c 87      <unknown>
+00000b48    cf 8e de 8d      <unknown>
+00000b4c    f8 d4 9e 8b      <unknown>
+00000b50    91 e7 bb fe      <unknown>
+00000b54    95 d4 82 8b      <unknown>
+00000b58    bb 93 d2 93      <unknown>
+00000b5c    9d b5 da c4      <unknown>
+00000b60    bb e7 bb 89      <unknown>
+00000b64    9d bb 9e 8b      <unknown>
+00000b68    de 83 bb 87      <unknown>
+00000b6c    97 ce f0 9a      <unknown>
+00000b70    d4 e7 ce 8d      <unknown>
+00000b74    9d bb 84 86      <unknown>
+00000b78    de e7 dd 91      <unknown>
+00000b7c    8a d8 95 ee      <unknown>
+00000b80    da 89 df fe      <unknown>
+00000b84    95 d4 86 8b      <unknown>
+00000b88    bb 86 cc 9f      <unknown>
+00000b8c    81 91 f0 ee      <unknown>
+00000b90    bb 93 d3 97      <unknown>
+00000b94    8b bb 97 87      <unknown>
+00000b98    dc 86 d5 8a      <unknown>
+00000b9c    91 d8 f0 8c      <unknown>
+00000ba0    d4 92 d7 9a      <unknown>
+00000ba4    9d c9 f0 9d      <unknown>
+00000ba8    d3 8e de 92      <unknown>
+00000bac    9c d2 9e 89      <unknown>
+00000bb0    bb 93 d3 9b      <unknown>
+00000bb4    f8 c8 95 8d      <unknown>
+00000bb8    c9 82 cf d4      <unknown>
+00000bbc    f8 bb f0 97      <unknown>
+00000bc0    d4 92 bb 8d      <unknown>
+00000bc4    9d de 9b e0      mov r155, dword [r222 + r157]
+00000bc8    91 cd bb fe      <unknown>
+00000bcc    f8 d3 9f 99      <unknown>
+00000bd0    de 91 de 8c      <unknown>
+00000bd4    f4 bb 89 81      <unknown>
+00000bd8    ce 95 bb 8d      <unknown>
+00000bdc    8c da 9d 87      <unknown>
+00000be0    d5 86 bb 8d      <unknown>
+00000be4    9d de 9d 9d      <unknown>
+00000be8    bb 93 d4 fe      <unknown>
+00000bec    9a de f0 98      <unknown>
+00000bf0    de 95 c2 fe      <unknown>
+00000bf4    94 d4 87 ee      <unknown>
+00000bf8    91 e7 bb fe      <unknown>
+00000bfc    99 dd 84 8b      <unknown>
+00000c00    c9 e7 c2 91      <unknown>
+00000c04    8d c9 f0 9e      <unknown>
+00000c08    c9 82 cd 97      <unknown>
+00000c0c    97 ce 83 ee      <unknown>
+00000c10    de 81 dd 91      <unknown>
+00000c14    8a cf 83 ef      <unknown>
+00000c18    91 cd bb fe      <unknown>
+00000c1c    f8 cc 95 e9      mov r9, byte [r5 + 0xccf8]
+00000c20    c9 82 bb 99      <unknown>
+00000c24    97 d5 9e 8f      <unknown>
+00000c28    bb 83 de 9f      <unknown>
+00000c2c    94 bb 87 87      <unknown>
+00000c30    cf 8f bb 8a      <unknown>
+00000c34    90 d2 83 ee      <unknown>
+00000c38    d9 9e bb 9d      <unknown>
+00000c3c    97 d4 9b 87      <unknown>
+00000c40    d5 80 bb 8b      <unknown>
+00000c44    88 bb 91 c4      <unknown>
+00000c48    bb e7 bb 8d      <unknown>
+00000c4c    88 de 93 87      <unknown>
+00000c50    da 8b bb 8e      <unknown>
+00000c54    97 cf 99 81      <unknown>
+00000c58    d5 e9 bb 97      <unknown>
+00000c5c    f8 d3 91 98      <unknown>
+00000c60    de e7 cf 96      <unknown>
+00000c64    9d bb 82 8b      <unknown>
+00000c68    d8 8e cb 9b      <unknown>
+00000c6c    f8 d6 9f 9d      <unknown>
+00000c70    cf 8b c2 fe      <unknown>
+00000c74    8f d4 82 85      <unknown>
+00000c78    de 83 91 fe      <unknown>
+00000c7c    f8 bb 9f 9b      <unknown>
+00000c80    cf e7 d9 8b      <unknown>
+00000c84    8c bb 95 87      <unknown>
+00000c88    dc 8f cf fe      <unknown>
+00000c8c    97 dd f0 9a      <unknown>
+00000c90    d3 82 bb 97      <unknown>
+00000c94    96 dc 82 8b      <unknown>
+00000c98    df 8e de 90      <unknown>
+00000c9c    8c c8 f0 80      <unknown>
+00000ca0    de 82 df fe      <unknown>
+00000ca4    99 bb 9c 87      <unknown>
+00000ca8    cf 93 d7 9b      <unknown>
+00000cac    d2 bb f0 ee      <unknown>
+00000cb0    cf 90 de 9f      <unknown>
+00000cb4    93 d2 9e 89      <unknown>
+00000cb8    b5 e7 c8 8e      <unknown>
+00000cbc    9d d8 99 88      <unknown>
+00000cc0    c2 e7 cf 96      <unknown>
+00000cc4    9d bb 99 80      <unknown>
+00000cc8    dc 95 de 9a      <unknown>
+00000ccc    91 de 9e 9a      <unknown>
+00000cd0    bb 89 ce 93      <unknown>
+00000cd4    9a de 82 9d      <unknown>
+00000cd8    bb ef d2 90      <unknown>
+00000cdc    f8 d3 95 96      <unknown>
+00000ce0    b2 cd bb fe      <unknown>
+00000ce4    f8 da 9e 8a      <unknown>
+00000ce8    bb 93 d3 9b      <unknown>
+00000cec    91 c9 f0 8f      <unknown>
+00000cf0    d8 84 d4 93      <unknown>
+00000cf4    88 da 9e 97      <unknown>
+00000cf8    d2 89 dc fe      <unknown>
+00000cfc    8c cc 95 8f      <unknown>
+00000d00    d0 e7 cd 9f      <unknown>
+00000d04    94 ce 95 9d      <unknown>
+00000d08    bb 93 d4 fe      <unknown>
+00000d0c    8b de 95 ee      <unknown>
+00000d10    d2 81 bb 89      <unknown>
+00000d14    9d 91 f0 ee      <unknown>
+00000d18    bb 84 da 90      <unknown>
+00000d1c    f8 cc 9f 9c      <unknown>
+00000d20    d0 e7 cf 96      <unknown>
+00000d24    91 c8 f0 81      <unknown>
+00000d28    ce 93 b5 d4      <unknown>
+00000d2c    d2 91 d0 87      <unknown>
+00000d30    d5 80 c9 9b      <unknown>
+00000d34    9c d2 95 80      <unknown>
+00000d38    cf e7 b3 ee      <unknown>
+00000d3c    f5 fd f9 ee      <unknown>
+00000d40    bb f9 bb de      <unknown>
+00000d44    8c cc 95 8f      <unknown>
+00000d48    d0 e7 cd 9f      <unknown>
+00000d4c    94 ce 95 ee      <unknown>
+00000d50    b3 f7 b6 ea      mov byte [r247 + r179], r182
+00000d54    f1 bb ee ee      <unknown>
+00000d58    9b 88 d0 fe      <unknown>
+00000d5c    94 de 84 9d      <unknown>
+00000d60    bb 93 c9 87      <unknown>
+00000d64    f8 cf 98 87      <unknown>
+00000d68    c8 e7 c9 9b      <unknown>
+00000d6c    9b d2 80 8b      <unknown>
+00000d70    b5 e9 91 de      <unknown>
+00000d74    8d dc 98 e0      mov r152, dword [r220 + r141]
+00000d78    b5 e7 cf 96      <unknown>
+00000d7c    99 cf f0 9a      <unknown>
+00000d80    da 94 cf 9b      <unknown>
+00000d84    8b bb 98 81      <unknown>
+00000d88    c9 95 d2 9c      <unknown>
+00000d8c    94 de f0 f4      <unknown>
+00000d90    b3 cd 9b 01      <unknown>
+00000d94    29 39 8b 34      <unknown>
+00000d98    d7 e1 ef 3b      <unknown>
+00000d9c    07 81 66 90      <unknown>
+00000da0    f9 42 d6 b6      <unknown>
+00000da4    85 62 00 0a      <unknown>
+00000da8    8b fe 4d 78      <unknown>
+00000dac    17 37 46 0e      <unknown>
+00000db0    5e 2f de 2c      <unknown>
+00000db4    14 a1 3a 41      <unknown>
+00000db8    7f c6 82 6a      <unknown>
+00000dbc    34 c4 d4 0a      <unknown>
+00000dc0    9b cc 23 bb      <unknown>
+00000dc4    62 96 8e b4      <unknown>
+00000dc8    21 b0 f0 07      <unknown>
+00000dcc    1f 8b 60 73      <unknown>
+00000dd0    10 82 15 da      <unknown>
+00000dd4    16 de c6 06      <unknown>
+00000dd8    9f 27 f6 53      <unknown>
+00000ddc    fc e1 db 0e      <unknown>
+00000de0    0f 0f 25 c5      <unknown>
+00000de4    d0 c9 b8 89      <unknown>
+00000de8    47 6e 7a f1      shr r122, 0x6e47
+00000dec    3d fb f6 71      <unknown>
+00000df0    27 78 13 71      <unknown>
+00000df4    6e ff 2e 52      <unknown>
+00000df8    fb b8 b2 5a      <unknown>
+00000dfc    de ba 03 60      <unknown>
+00000e00    02 67 de d6      <unknown>
+00000e04    2f 5d 6e c4      <unknown>
+00000e08    26 e3 c3 3b      <unknown>
+00000e0c    b1 3a 07 ca      <unknown>
+00000e10    dc a9 d9 55      <unknown>
+00000e14    f1 3b 68 29      <unknown>
+00000e18    4d f2 ec d1      syscall 62029
+00000e1c    ea fe bf c0      jeq 0xfeea
+00000e20    24 a9 70 de      <unknown>
+00000e24    d8 9b d0 ce      <unknown>
+00000e28    9b c7 9b de      <unknown>
+00000e2c    d8 9b d0 ce      <unknown>
+00000e30    9b c7 9b de      <unknown>

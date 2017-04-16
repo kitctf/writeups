@@ -1,0 +1,65 @@
+Data
+
+0x2c  -> BP
+0x30  -> SP
+0x34  -> LR
+0x38  -> IP (relative to 0xc0de0000)
+
+0x40  -> opcode
+0x44  -> a1
+0x48  -> a2
+0x4c  -> a3
+0x50  -> a2:a3 = b1
+0x54  -> jmpflag
+0x64  -> flag1 (equals flag)
+
+
+
+Instruction format (4 byte)
+
+type1
+a3 a2 a1 opcode
+
+type2
+b1 a1 opcode
+
+
+
+Opcodes
+
+opcode    desc
+a0        mov r[a1], r[a1] + b1/r[p2]   # a1 & 0x10 / !(a1 & 0x10)
+a1        mov r[a1], r[a1] - b1/r[p2]   # a1 & 0x10 / !(a1 & 0x10)
+a2        mov r[a1], r[a1] ^ b1/r[p2]   # a1 & 0x10 / !(a1 & 0x10)
+a3        mov r[a1], b1 / r[p2]         # a1 & 0x10 / !(a1 & 0x10)
+b0        cmp r[a1], b1 / r[p2]         # a1 & 0x10 / !(a1 & 0x10)
+
+c0        if (flag1) { ip = b1; jmpflag = 1 }
+c1        if (!flag1) { ip = b1; jmpflag = 1 }
+c2        ip = b1; jmpflag = 1
+c3        lr = ip + 4; ip = b1; jmpflag = 1
+
+d0        ip = lr ; jmpflag = 1
+d1        syscall(b1, r[0], r[1], r[2])
+
+e0        r[a1] = dword [r[a2] + r[a3]]
+e4        r[a1] = word [r[a2] + r[a3]]
+e8        r[a1] = byte [r[a2] + r[a3]]
+
+e1        r[a1>>4] = dword [r[a1&0xf] + b1]
+e5        r[a1>>4] = word [r[a1&0xf] + b1]
+e9        r[a1>>4] = byte [r[a1&0xf] + b1]
+
+e2        dword [r[a2] + r[a3]] = r[a1]
+e6        word [r[a2] + r[a3]] = r[a1]
+ea        byte [r[a2] + r[a3]] = r[a1]
+
+e3        dword [r[a1&f] + b1] = r[a1>>4]
+e7        word [r[a1&f] + b1] = r[a1>>4]
+eb        byte [r[a1&f] + b1] = r[a1>>4]
+
+f0        r[a1] <<= b1
+f1        r[a1] >>= b1
+f2        push r[a1]
+f3        pop rgs[a1]
+ff        halt = exit(666)
