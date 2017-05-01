@@ -53,6 +53,7 @@ def get_sound(num):
 
 def pack_chunk(chunk):
     chunk = zlib.compress(chunk)
+    # not even this is necessary......
     assert len(chunk) <= 0x10000
     return struct.pack('<I', len(chunk)) + chunk
 
