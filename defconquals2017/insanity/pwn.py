@@ -47,11 +47,13 @@ def get_sound(num):
             # somehow everything gets XOR'ed with 0x80
             block.append(chr(hi^0x80))
             samples+=1
+    # this is actually not necessary, but we failed at reversing...
     assert samples <= 0x10000
     return ''.join(block)
 
 def pack_chunk(chunk):
     chunk = zlib.compress(chunk)
+    assert len(chunk) <= 0x10000
     return struct.pack('<I', len(chunk)) + chunk
 
 def interact(s):
